@@ -4,8 +4,12 @@
   "private": true,
   "dependencies": {
     "custom-react-scripts": "0.2.2",
+    "proptypes": "^1.1.0",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0"
+    "react-dom": "^16.4.0",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^4.2.2",
+    "redux": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
