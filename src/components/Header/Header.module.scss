@@ -1,0 +1,48 @@
+@import '../../theme';
+
+.mainContainer {
+  background-color: $main-color;
+}
+
+.title {
+  font-size: 1.35em;
+  margin: 0;
+}
+
+.navList {
+  margin-top: 5px;
+}
+
+.title a,
+.navList a {
+  text-align: center;
+  display: block;
+  padding: 10px 15px;
+}
+
+.navList a {
+  font-size: .95em;
+  text-transform: uppercase;
+}
+
+@media (min-width: $sm) {
+  .navContainer,
+  .navList {
+    display: flex;
+  }
+
+  .navContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (min-width: $md) {
+  .navContainer,
+  .navList {
+    flex-direction: row;
+  }
+  .navList {
+    margin-left: auto;
+  }
+}
