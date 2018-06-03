@@ -1,0 +1,42 @@
+@import './theme';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Varela Round', sans-serif;
+  line-height: 1.6;
+  color: $background-color;
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+p {
+  font-size: .95em;
+  margin: 0 0 1em 0;
+}
+
+h2,
+h3,
+a {
+  color: $text-color;
+}
+
+h2,
+h3 {
+  margin: 0 0 .8em 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}

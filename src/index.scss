@@ -1,0 +1,14 @@
+@import './theme';
+
+@media (min-width: $sm) {
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
+@media (min-width: $md) {
+  .container {
+    width: 80%;
+    max-width: 1150px;
+  }
+}
