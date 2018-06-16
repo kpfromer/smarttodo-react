@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header renders a menu bar 1`] = `
+<ul
+  className="navList"
+>
+  <NavLink
+    activeClassName="active"
+    aria-current="page"
+    to="/"
+  >
+    Home
+  </NavLink>
+  <NavLink
+    activeClassName="active"
+    aria-current="page"
+    to="/settings"
+  >
+    Settings
+  </NavLink>
+</ul>
+`;
+
+exports[`Header renders a title 1`] = `
+<h1
+  className="title"
+>
+  <NavLink
+    activeClassName="active"
+    aria-current="page"
+    to="/"
+  >
+    Smarttodo
+  </NavLink>
+</h1>
+`;
