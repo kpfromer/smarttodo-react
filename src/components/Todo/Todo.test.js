@@ -16,6 +16,10 @@ const { shallow: setup } = SetupComponent({
 
 describe('Todo', () => {
 
+  it('renders without crashing', () => {
+    setup();
+  });
+
   it('renders a checkbox and displays `description` label', () => {
     const { wrapper } = setup();
     expect(wrapper.find('.view')).toMatchSnapshot();
