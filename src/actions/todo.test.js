@@ -13,6 +13,19 @@ describe('todo actions', () => {
 
     expect(TodoActionCreators.addTodo(description, completed)).toEqual(expected);
   });
+  
+  it('creates an action to add a todo with a completed false by default', () => {
+    const description = 'my name is jeff';
+
+    const expected = {
+      type: TodoActionTypes.ADD_TODO,
+      description,
+      completed: false
+    };
+
+    expect(TodoActionCreators.addTodo(description)).toEqual(expected);
+  });
+  
   it('creates an action to remove a todo', () => {
     const id = '101';
     const expected = {
