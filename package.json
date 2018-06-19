@@ -27,5 +27,14 @@
     "jest-enzyme": "^6.0.1",
     "react-component-setup": "^0.1.1",
     "react-test-renderer": "^16.4.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/index.js",
+      "!src/setupTests.js",
+      "!src/registerServiceWorker.js",
+      "!/node_modules/"
+    ]
   }
 }
