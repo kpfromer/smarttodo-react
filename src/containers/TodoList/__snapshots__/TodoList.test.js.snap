@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoList given \`todos\` renders a list of Todos 1`] = `
+Array [
+  <Todo
+    completed={false}
+    description="math quiz"
+    id="10"
+    key="10"
+    onCheck={[Function]}
+    onRemove={[Function]}
+    onUpdate={[Function]}
+/>,
+  <Todo
+    completed={true}
+    description="computer science test"
+    id="11"
+    key="11"
+    onCheck={[Function]}
+    onRemove={[Function]}
+    onUpdate={[Function]}
+/>,
+]
+`;
+
+exports[`TodoList renders a DescriptionForm in the list 1`] = `
+<DescriptionForm
+  className="newTodo"
+  clearOnUpdate={true}
+  description=""
+  invalidClassName="invalid"
+  onUpdate={[Function]}
+/>
+`;
