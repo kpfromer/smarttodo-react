@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`todo reducer should add a todo 1`] = `
+Object {
+  "otherStateValues": "hello",
+  "todos": Array [
+    Object {
+      "completed": true,
+      "description": "other",
+      "id": "1",
+    },
+    Object {
+      "completed": false,
+      "description": "todos",
+      "id": "2",
+    },
+    Object {
+      "completed": true,
+      "description": "New Task",
+      "id": "0",
+    },
+  ],
+}
+`;
+
+exports[`todo reducer should remove a todo 1`] = `
+Object {
+  "otherStateValues": "hello",
+  "todos": Array [
+    Object {
+      "completed": false,
+      "description": "todos",
+      "id": "2",
+    },
+  ],
+}
+`;
+
+exports[`todo reducer should update a todo's completed 1`] = `
+Object {
+  "otherStateValues": "hello",
+  "todos": Array [
+    Object {
+      "completed": false,
+      "description": "other",
+      "id": "1",
+    },
+    Object {
+      "completed": false,
+      "description": "todos",
+      "id": "2",
+    },
+  ],
+}
+`;
+
+exports[`todo reducer should update a todo's description 1`] = `
+Object {
+  "otherStateValues": "hello",
+  "todos": Array [
+    Object {
+      "completed": true,
+      "description": "i am NEW!",
+      "id": "1",
+    },
+    Object {
+      "completed": false,
+      "description": "todos",
+      "id": "2",
+    },
+  ],
+}
+`;
