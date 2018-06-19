@@ -1,0 +1,4 @@
+export const ADD_TODO = 'todo/ADD_TODO';
+export const UPDATE_TODO_DESCRIPTION = 'todo/UPDATE_TODO_DESCRIPTION';
+export const UPDATE_TODO_COMPLETED = 'todo/UPDATE_TODO_COMPLETED';
+export const REMOVE_TODO = 'todo/REMOVE_TODO';
