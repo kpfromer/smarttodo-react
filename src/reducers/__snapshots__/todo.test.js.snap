@@ -2,7 +2,6 @@
 
 exports[`todo reducer should add a todo 1`] = `
 Object {
-  "otherStateValues": "hello",
   "todos": Array [
     Object {
       "completed": true,
@@ -25,7 +24,6 @@ Object {
 
 exports[`todo reducer should remove a todo 1`] = `
 Object {
-  "otherStateValues": "hello",
   "todos": Array [
     Object {
       "completed": false,
@@ -38,7 +36,6 @@ Object {
 
 exports[`todo reducer should update a todo's completed 1`] = `
 Object {
-  "otherStateValues": "hello",
   "todos": Array [
     Object {
       "completed": false,
@@ -56,7 +53,6 @@ Object {
 
 exports[`todo reducer should update a todo's description 1`] = `
 Object {
-  "otherStateValues": "hello",
   "todos": Array [
     Object {
       "completed": true,

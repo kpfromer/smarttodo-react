@@ -6,7 +6,6 @@ describe('todo reducer', () => {
 
   beforeEach(() => {
     currentState = {
-      otherStateValues: 'hello',
       todos: [
         {
           id: '1',
