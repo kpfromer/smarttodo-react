@@ -51,13 +51,20 @@ export class TodoList extends Component {
   }
 }
 
-export const mapStateToProps = state => ({
+export const mapStateToProps = state => ( {
   todos: state.todos
-});
+} );
 
-export default connect(mapStateToProps, {
-  addTodo: TodoActionCreators.addTodo,
-  updateTodoDescription: TodoActionCreators.updateTodoDescription,
-  checkTodo: TodoActionCreators.updateTodoCompleted,
-  removeTodo: TodoActionCreators.removeTodo
-})(TodoList);
+const actions = [
+  'addTodo',
+  'updateTodoDescription',
+  'checkTodo',
+  'removeTodo'
+];
+
+const mapDispatchToProps = actions.reduce(
+  (actionList, actionName) => ( { ...actionList, [actionName]: TodoActionCreators[actionName] } ),
+  {}
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
