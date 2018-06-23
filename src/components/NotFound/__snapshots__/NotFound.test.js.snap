@@ -2,7 +2,7 @@
 
 exports[`NotFound renders a not found message 1`] = `
 <div
-  style="container"
+  className="container"
 >
   <h1
     className="title"
