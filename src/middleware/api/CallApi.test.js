@@ -24,7 +24,6 @@ describe('callApi', () => {
     expect(fetch.mock.calls[0][0]).toEqual(expect.objectContaining({
       method
     }));
-    // console.log(fetch);
   });
   it('calls api with content type of json', async () => {
     fetch.mockImplementation(() => Promise.resolve([]));
