@@ -1,4 +1,4 @@
-import axios from 'axios';
+import CallApi from './CallApi';
 
 export const API_ROOT = 'http://localhost:3001/v1';
 export const CALL_API = 'call/CALL_API';
@@ -38,7 +38,7 @@ export default ({ getAuthFromState } = { getAuthFromState: val => val }) => stor
   }
 
   if (!VALID_TYPES.includes(method)) {
-    throw new Error(`Invalid call api type: ${method}`);
+    throw new Error(`Invalid call api method: ${method}`);
   }
 
   if (CREATE_TYPES.includes(method) && !data) {
@@ -54,13 +54,13 @@ export default ({ getAuthFromState } = { getAuthFromState: val => val }) => stor
   let token;
 
   if (authenticate) {
-    token = store.getState().login.token;
+    token = getAuthFromState(store.getState());
   }
 
   const [requestType, successType, failureType] = types;
   next(actionWith({ type: requestType }));
 
-  return callApi(endpoint, method, mapResponse, data, token).then(
+  return CallApi(endpoint, method, mapResponse, data, token).then(
     response => next(actionWith({
       response,
       type: successType
