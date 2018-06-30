@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login actions logout creates an invalidate login action 1`] = `
+Object {
+  "type": "login/INVALIDATE_LOGIN",
+}
+`;
+
+exports[`login actions tryLogin creates an api call action to login 1`] = `
+Object {
+  "authenticate": false,
+  "data": Object {
+    "password": "verysecurepassword",
+    "username": "iAmARadUsername",
+  },
+  "endpoint": "/login",
+  "mapResponse": [Function],
+  "method": "POST",
+  "types": Array [
+    "login/REQUEST_LOGIN",
+    "login/RECEIVE_LOGIN",
+    "login/FAILURE_LOGIN",
+  ],
+}
+`;
