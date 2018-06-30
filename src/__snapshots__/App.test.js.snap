@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders routes 1`] = `
+<Switch>
+  <Connect(PrivateRoute)
+    component={[Function]}
+    path="/todo"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/login"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/logout"
+  />
+  <Route
+    component={[Function]}
+  />
+</Switch>
+`;
