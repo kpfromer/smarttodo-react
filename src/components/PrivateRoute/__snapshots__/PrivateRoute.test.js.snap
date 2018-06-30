@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrivateRoute passes the rest of it's props to the Route 1`] = `
+<Route
+  otherProps="needed"
+  render={[Function]}
+  to="/an-example-location"
+/>
+`;
+
+exports[`PrivateRoute renders a route that redirects users to \`/login\` if not \`isAuthenticated\` 1`] = `
+<Redirect
+  push={false}
+  to={
+    Object {
+      "pathname": "/login",
+    }
+  }
+/>
+`;
+
+exports[`PrivateRoute renders a route to component if \`isAuthenticated\` 1`] = `
+<CustomComponent
+  hello="world"
+  my="name is kyle"
+/>
+`;
