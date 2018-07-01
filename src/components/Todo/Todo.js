@@ -8,7 +8,6 @@ import DescriptionForm from "./DescriptionForm";
 export default class Todo extends Component {
 
   static propTypes = {
-    id: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
     onCheck: PropTypes.func.isRequired,
@@ -20,22 +19,19 @@ export default class Todo extends Component {
     editing: false
   };
 
-  checkTodo = id =>
-    event => this.props.onCheck(id, event.target.checked);
-  removeTodo = id =>
-    () => this.props.onRemove(id);
+  checkTodo = event => this.props.onCheck(event.target.checked);
+  removeTodo = () => this.props.onRemove();
 
   startEditing = () =>
     this.setState({ editing: true });
 
-  handleUpdate = id =>
-    description => {
+  handleUpdate = description => {
     this.setState({ editing: false });
-    this.props.onUpdate(id, description);
+    this.props.onUpdate(description);
   };
 
   render() {
-    const { id, description, completed } = this.props;
+    const { description, completed } = this.props;
 
     const completedStyle = completed ? styles.completed : '';
     const editingStyle = this.state.editing ? styles.editing : '';
@@ -47,16 +43,16 @@ export default class Todo extends Component {
             className={styles.toggle}
             type="checkbox"
             checked={completed}
-            onChange={this.checkTodo(id)}
+            onChange={this.checkTodo}
           />
           <label onDoubleClick={this.startEditing}>{description}</label>
-          <button className={styles.destroy} onClick={this.removeTodo(id)}/>
+          <button className={styles.destroy} onClick={this.removeTodo}/>
         </div>
         <DescriptionForm
           className={styles.edit}
           invalidClassName={styles.invalid}
           description={description}
-          onUpdate={this.handleUpdate(id)}
+          onUpdate={this.handleUpdate}
         />
       </li>
     );

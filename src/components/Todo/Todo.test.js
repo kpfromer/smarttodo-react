@@ -5,7 +5,6 @@ import DescriptionForm from "./DescriptionForm";
 const { shallow: setup } = SetupComponent({
   Component: Todo,
   defaultProps: {
-    id: '666',
     description: 'what todo?',
     completed: true,
     onCheck: () => {},
@@ -42,7 +41,7 @@ describe('Todo', () => {
     });
 
     it('runs `onCheck` with id and checked value', () => {
-      expect(mockCheck).toHaveBeenCalledWith('666', false);
+      expect(mockCheck).toHaveBeenCalledWith(false);
     });
   });
 
@@ -69,7 +68,7 @@ describe('Todo', () => {
       });
 
       it('runs `onUpdate` with id and updated description', () => {
-        expect(mockUpdate).toHaveBeenCalledWith('666', 'new description');
+        expect(mockUpdate).toHaveBeenCalledWith('new description');
       });
     });
   });
@@ -89,7 +88,7 @@ describe('Todo', () => {
     });
 
     it('runs `onRemove` with id', () => {
-      expect(mockRemove).toHaveBeenCalledWith('666');
+      expect(mockRemove).toHaveBeenCalled();
     });
   });
 });
