@@ -3,25 +3,27 @@ import { SetupComponent } from "react-component-setup";
 import Todo from "../../components/Todo/Todo";
 import DescriptionForm from "../../components/Todo/DescriptionForm";
 
+const todos = [
+  {
+    id: '10',
+    description: 'math quiz',
+    completed: false
+  },
+  {
+    id: '11',
+    description: 'computer science test',
+    completed: true
+  }
+];
+
 const { shallow: setup } = SetupComponent({
   Component: TodoList,
   defaultProps: {
     addTodo: () => {},
-    updateTodoDescription: () => {},
-    checkTodo: () => {},
+    updateTodo: () => {},
     removeTodo: () => {},
-    todos: [
-      {
-        id: '10',
-        description: 'math quiz',
-        completed: false
-      },
-      {
-        id: '11',
-        description: 'computer science test',
-        completed: true
-      }
-    ]
+    loadTodos: () => {},
+    todos
   }
 });
 
@@ -67,36 +69,60 @@ describe('TodoList', () => {
   });
 
   describe('Todo', () => {
-    let mockCheckTodo, mockRemoveTodo, mockUpdateTodoDescription;
+    let mockUpdateTodo, mockRemoveTodo;
     beforeEach(() => {
-      mockCheckTodo = jest.fn();
+      mockUpdateTodo = jest.fn();
       mockRemoveTodo = jest.fn();
-      mockUpdateTodoDescription = jest.fn();
 
       ({ wrapper } = setup({
-        checkTodo: mockCheckTodo,
-        removeTodo: mockRemoveTodo,
-        updateTodoDescription: mockUpdateTodoDescription
+        updateTodo: mockUpdateTodo,
+        removeTodo: mockRemoveTodo
       }));
     });
     describe('on check', () => {
       it('updates the todo\'s completed value', () => {
-        wrapper.find(Todo).first().props().onCheck('10', true);
-        expect(mockCheckTodo).toHaveBeenCalledWith('10', true);
+        wrapper.find(Todo).first().props().onCheck(true);
+        expect(mockUpdateTodo).toHaveBeenCalledWith(
+          {
+            id: '10',
+            description: 'math quiz',
+            completed: false
+          },
+          {
+            id: '10',
+            description: 'math quiz',
+            completed: true
+          },
+          '10'
+        );
       });
     });
 
     describe('on remove', () => {
       it('removes the todo', () => {
-        wrapper.find(Todo).first().props().onRemove('10');
-        expect(mockRemoveTodo).toHaveBeenCalledWith('10');
+        const position = 1;
+        wrapper.find(Todo).at(position).props().onRemove();
+        expect(mockRemoveTodo).toHaveBeenCalledWith(todos[position], position, todos[position].id);
       });
     });
 
     describe('on update', () => {
       it('updates the todo\'s description', () => {
-        wrapper.find(Todo).first().props().onUpdate('10', 'new description');
-        expect(mockUpdateTodoDescription).toHaveBeenCalledWith('10', 'new description');
+        const description = 'new description';
+        wrapper.find(Todo).first().props().onUpdate(description);
+        expect(mockUpdateTodo).toHaveBeenCalledWith(
+          {
+            id: '10',
+            description: 'math quiz',
+            completed: false
+          },
+          {
+            id: '10',
+            description: description,
+            completed: false
+          },
+          '10'
+        );
       });
     });
   });
@@ -117,8 +143,9 @@ describe('mapStateToProps', () => {
       }
     ];
     const mapped = mapStateToProps({
-      todos: mockTodos,
-      otherItems: 'hello'
+      todos: {
+        todos: mockTodos
+      }
     });
 
     expect(mapped).toEqual({
@@ -126,3 +153,7 @@ describe('mapStateToProps', () => {
     });
   });
 });
+
+
+
+// TODO: test for fetch todos

@@ -5,7 +5,6 @@ Array [
   <Todo
     completed={false}
     description="math quiz"
-    id="10"
     key="10"
     onCheck={[Function]}
     onRemove={[Function]}
@@ -14,7 +13,6 @@ Array [
   <Todo
     completed={true}
     description="computer science test"
-    id="11"
     key="11"
     onCheck={[Function]}
     onRemove={[Function]}

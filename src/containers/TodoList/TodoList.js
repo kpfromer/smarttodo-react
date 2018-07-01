@@ -18,23 +18,31 @@ export class TodoList extends Component {
       completed: PropTypes.bool.isRequired
     })),
     addTodo: PropTypes.func.isRequired,
-    updateTodoDescription: PropTypes.func.isRequired,
-    checkTodo: PropTypes.func.isRequired,
+    updateTodo: PropTypes.func.isRequired,
     removeTodo: PropTypes.func.isRequired
   };
 
-  render() {
-    const { todos, addTodo, checkTodo, removeTodo, updateTodoDescription } = this.props;
+  updateTodoByProp = propName => todo => value =>
+    this.props.updateTodo(todo, {
+      ...todo,
+      [propName]: value
+    }, todo.id);
 
-    const todoItems = todos.map(todo =>
+  checkTodo = this.updateTodoByProp('completed');
+  updateDescription = this.updateTodoByProp('description');
+  removeTodo = (todo, index) => () => this.props.removeTodo(todo, index, todo.id);
+
+  render() {
+    const { todos, addTodo } = this.props;
+
+    const todoItems = todos.map((todo, index) =>
       <Todo
         key={todo.id}
-        id={todo.id}
         description={todo.description}
         completed={todo.completed}
-        onCheck={checkTodo}
-        onRemove={removeTodo}
-        onUpdate={updateTodoDescription}
+        onCheck={this.checkTodo(todo)}
+        onUpdate={this.updateDescription(todo)}
+        onRemove={this.removeTodo(todo, index)}
       />
     );
     return (
@@ -52,12 +60,13 @@ export class TodoList extends Component {
 }
 
 export const mapStateToProps = state => ({
-  todos: state.todos
+  todos: state.todos.todos
 });
 
-export default connect(mapStateToProps, {
+const staticActions = {
   addTodo: TodoActionCreators.addTodo,
-  updateTodoDescription: TodoActionCreators.updateTodoDescription,
-  checkTodo: TodoActionCreators.updateTodoCompleted,
+  updateTodo: TodoActionCreators.updateTodo,
   removeTodo: TodoActionCreators.removeTodo
-})(TodoList);
+};
+
+export default connect(mapStateToProps, staticActions)(TodoList);
