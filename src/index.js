@@ -7,13 +7,13 @@ import './index.scss';
 
 import { createStore } from 'redux';
 import { Provider } from "react-redux";
-import TodoReducer from "./reducers/todo";
+import Reducers from "./reducers/";
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
 const store = createStore(
-  TodoReducer,
+  Reducers,
   window.devToolsExtension && window.devToolsExtension()
 );
 
