@@ -1,29 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`todo reducer should add a todo 1`] = `
+exports[`todo reducer ADD_TODO should add a todo 1`] = `
 Object {
+  "didInvalidate": false,
+  "isFetching": false,
   "todos": Array [
     Object {
+      "completed": false,
+      "description": "math science, chem",
+      "id": "13242352",
+    },
+    Object {
       "completed": true,
-      "description": "other",
-      "id": "1",
+      "description": "different",
+      "id": "2dfasdfasdf",
     },
     Object {
       "completed": false,
-      "description": "todos",
-      "id": "2",
+      "description": "old todo",
+      "id": "a-temp-id",
     },
     Object {
       "completed": true,
       "description": "New Task",
-      "id": "0",
+      "id": "a-temp-id-if-needed-to-remove-todo",
     },
   ],
 }
 `;
 
-exports[`todo reducer should remove a todo 1`] = `
+exports[`todo reducer ADD_TODO should remove todo if the add todo api call fails 1`] = `
 Object {
+  "didInvalidate": false,
+  "isFetching": false,
+  "todos": Array [
+    Object {
+      "completed": false,
+      "description": "math science, chem",
+      "id": "13242352",
+    },
+    Object {
+      "completed": true,
+      "description": "different",
+      "id": "2dfasdfasdf",
+    },
+  ],
+}
+`;
+
+exports[`todo reducer ADD_TODO should replace the added todo with the real id from api response 1`] = `
+Object {
+  "didInvalidate": false,
+  "isFetching": false,
+  "todos": Array [
+    Object {
+      "completed": false,
+      "description": "math science, chem",
+      "id": "13242352",
+    },
+    Object {
+      "completed": true,
+      "description": "different",
+      "id": "2dfasdfasdf",
+    },
+    Object {
+      "completed": false,
+      "description": "old todo",
+      "id": "api-database-id!",
+    },
+  ],
+}
+`;
+
+exports[`todo reducer REMOVE_TODO should remove a todo 1`] = `
+Object {
+  "didInvalidate": false,
+  "isFetching": false,
   "todos": Array [
     Object {
       "completed": false,
@@ -34,11 +86,18 @@ Object {
 }
 `;
 
-exports[`todo reducer should update a todo's completed 1`] = `
+exports[`todo reducer REMOVE_TODO should revert to original todo if remove todo api call fails 1`] = `
 Object {
+  "didInvalidate": false,
+  "isFetching": false,
   "todos": Array [
     Object {
-      "completed": false,
+      "completed": true,
+      "description": "reverted todo",
+      "id": "1",
+    },
+    Object {
+      "completed": true,
       "description": "other",
       "id": "1",
     },
@@ -51,18 +110,82 @@ Object {
 }
 `;
 
-exports[`todo reducer should update a todo's description 1`] = `
+exports[`todo reducer UPDATE_TODO should revert to original todo if update todo api call fails 1`] = `
 Object {
+  "didInvalidate": false,
+  "isFetching": false,
   "todos": Array [
     Object {
       "completed": true,
-      "description": "i am NEW!",
+      "description": "reverted",
       "id": "1",
     },
     Object {
       "completed": false,
       "description": "todos",
       "id": "2",
+    },
+  ],
+}
+`;
+
+exports[`todo reducer UPDATE_TODO should update a todo 1`] = `
+Object {
+  "didInvalidate": false,
+  "isFetching": false,
+  "todos": Array [
+    Object {
+      "completed": false,
+      "description": "updated description",
+      "id": "1",
+    },
+    Object {
+      "completed": false,
+      "description": "todos",
+      "id": "2",
+    },
+  ],
+}
+`;
+
+exports[`todo reducer should display spinner on todos request 1`] = `
+Object {
+  "didInvalidate": false,
+  "isFetching": true,
+  "todos": Array [
+    Object {
+      "completed": true,
+      "description": "other",
+      "id": "1",
+    },
+    Object {
+      "completed": false,
+      "description": "todos",
+      "id": "2",
+    },
+  ],
+}
+`;
+
+exports[`todo reducer should replace todos from api response 1`] = `
+Object {
+  "didInvalidate": false,
+  "isFetching": false,
+  "todos": Array [
+    Object {
+      "completed": false,
+      "description": "math science, chem",
+      "id": "13242352",
+    },
+    Object {
+      "completed": true,
+      "description": "different",
+      "id": "2dfasdfasdf",
+    },
+    Object {
+      "completed": false,
+      "description": "ss test",
+      "id": "12345",
     },
   ],
 }

@@ -1,81 +1,91 @@
 import * as TodoActionTypes from '../actiontypes/todo';
-import { combineReducers } from "redux";
 
-const TODOS = [
-  {
-    id: '10000',
-    description: 'hello',
-    completed: true
+function todos(
+  state = {
+    isFetching: false,
+    didInvalidate: false,
+    todos: []
   },
-  {
-    id: '10001',
-    description: 'jack',
-    completed: false
-  },
-  {
-    id: '10002',
-    description: 'science hw',
-    completed: true
-  },
-  {
-    id: '10003',
-    description: 'math test',
-    completed: true
-  }
-];
-
-let apiId = 0;
-
-const findItemIndexById = (id, list) => list.findIndex(item => item.id === id);
-
-// TODO: add axios and post/get
-
-function todos(state = TODOS, action) {
+  action
+) {
   switch (action.type) {
-    case TodoActionTypes.ADD_TODO:
-      const addPlayerList = [
+    case TodoActionTypes.REQUEST_TODOS:
+      return {
         ...state,
-        {
-          id: apiId.toString(),
-          description: action.description,
-          completed: action.completed
-        }
-      ];
-      apiId += 1;
-      return addPlayerList;
-
+        isFetching: true,
+        didInvalidate: false
+      };
+    case TodoActionTypes.RECIEVE_TODOS:
+      return {
+        ...state,
+        isFetching: false,
+        didInvalidate: false,
+        todos: action.response
+      };
+    case TodoActionTypes.ADD_TODO:
+      // TODO: fix backend usage so it is not an array
+      return {
+        ...state,
+        todos: [
+          ...state.todos,
+          {
+            ...action.todo,
+            id: action.tempId
+          }
+        ]
+      };
+    case TodoActionTypes.ADD_TODO_SUCCESS:
+      const tempTodoIndex = state.todos.findIndex(todo => todo.id === action.tempId);
+      const tempTodo = state.todos[tempTodoIndex];
+      if (tempTodoIndex < 0) {
+        throw new Error('Todo not found!');
+      }
+      // TODO: same as ADD_TODO - fix backend usage so it is not an array
+      return {
+        ...state,
+        todos: [
+          ...state.todos.slice(0, tempTodoIndex),
+          {
+            ...tempTodo,
+            id: action.response[0]._id
+          },
+          ...state.todos.slice(tempTodoIndex + 1)
+        ]
+      };
+    case TodoActionTypes.ADD_TODO_FAILURE:
+      const tempTodoRemoveIndex = state.todos.findIndex(todo => todo.id === action.tempId); // TODO: extract
+      return {
+        ...state,
+        todos: [
+          ...state.todos.slice(0, tempTodoRemoveIndex),
+          ...state.todos.slice(tempTodoRemoveIndex + 1)
+        ]
+      };
     case TodoActionTypes.REMOVE_TODO:
-      const todoIndex = findItemIndexById(action.id, state);
-      const removePlayerList = [
-        ...state.slice(0, todoIndex),
-        ...state.slice(todoIndex + 1)
-      ];
-      return removePlayerList;
-
-    case TodoActionTypes.UPDATE_TODO_DESCRIPTION:
-      const updatePlayerDescriptionList = state.map((todo, index) => {
-        if (index === findItemIndexById(action.id, state)) {
-          return {
-            ...todo,
-            description: action.description
-          }
-        }
-        return todo;
-      });
-      return updatePlayerDescriptionList;
-
-    case TodoActionTypes.UPDATE_TODO_COMPLETED:
-      const updatePlayerCompletedList = state.map((todo, index) => {
-        if (index === findItemIndexById(action.id, state)) {
-          return {
-            ...todo,
-            completed: action.completed,
-          }
-        }
-        return todo;
-      });
-      return updatePlayerCompletedList;
-
+      return {
+        ...state,
+        todos: state.todos.filter(todo => todo.id !== action.id)
+      };
+    case TodoActionTypes.REMOVE_TODO_FAILURE:
+      const { todo: oldTodo, position: oldTodoPosition } = action.revert;
+      return {
+        ...state,
+        todos: [
+          ...state.todos.slice(0, oldTodoPosition),
+          oldTodo,
+          ...state.todos.slice(oldTodoPosition)
+        ]
+      };
+    case TodoActionTypes.UPDATE_TODO:
+      return {
+        ...state,
+        todos: state.todos.map(todo => todo.id === action.id ? action.todo : todo)
+      };
+    case TodoActionTypes.UPDATE_TODO_FAILURE:
+      return {
+        ...state,
+        todos: state.todos.map(todo => todo.id === action.id ? action.revert.todo : todo)
+      };
     default:
       return state;
   }
