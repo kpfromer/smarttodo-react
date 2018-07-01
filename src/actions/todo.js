@@ -1,32 +1,84 @@
 import * as TodoActionTypes from '../actiontypes/todo';
+import uuid from 'uuid/v4';
+import { CALL_API } from "../middleware/api/api";
 
-export const addTodo = (description, completed = false) => {
-  return {
-    type: TodoActionTypes.ADD_TODO,
+export const fetchTodos = () => ({
+  [CALL_API]: {
+    types: [
+      TodoActionTypes.REQUEST_TODOS,
+      TodoActionTypes.RECIEVE_TODOS,
+      TodoActionTypes.REQUEST_FAILURE_TODOS
+    ],
+    method: 'GET',
+    endpoint: '/todo',
+    mapResponse: todos => todos.map(todo => {
+      const { _id, ...todoWithDatabaseId } = todo;
+      return {
+        ...todoWithDatabaseId,
+        id: _id
+      }
+    })
+  }
+});
+
+export const addTodo = (description, completed = false) => ({
+  tempId: uuid(),
+  todo: {
     description,
     completed
-  };
-};
+  },
+  [CALL_API]: {
+    types: [
+      TodoActionTypes.ADD_TODO,
+      TodoActionTypes.ADD_TODO_SUCCESS,
+      TodoActionTypes.ADD_TODO_FAILURE
+    ],
+    method: 'POST',
+    endpoint: '/todo',
+    data: {
+      todos: [
+        { description, completed }
+      ]
+    }
+  }
+});
 
-export const removeTodo = id => {
-  return {
-    type: TodoActionTypes.REMOVE_TODO,
-    id
-  };
-};
+export const updateTodo = (prevTodo, newTodo, id) => {
 
-export const updateTodoDescription = (id, description) => {
+  const { id: unUsedId, ...newTodoWithoutId } = newTodo;
+
   return {
-    type: TodoActionTypes.UPDATE_TODO_DESCRIPTION,
     id,
-    description
-  };
-};
-
-export const updateTodoCompleted = (id, completed) => {
-  return {
-    type: TodoActionTypes.UPDATE_TODO_COMPLETED,
-    id,
-    completed
+    todo: newTodo,
+    revert: {
+      todo: newTodoWithoutId
+    },
+    [CALL_API]: {
+      types: [
+        TodoActionTypes.UPDATE_TODO,
+        TodoActionTypes.UPDATE_TODO_SUCCESS,
+        TodoActionTypes.UPDATE_TODO_FAILURE
+      ],
+      method: 'PUT',
+      endpoint: `/todo/${id}`,
+      data: newTodoWithoutId
+    }
   }
 };
+
+export const removeTodo = (todo, position, id) => ({
+  id,
+  revert: {
+    todo,
+    position
+  },
+  [CALL_API]: {
+    types: [
+      TodoActionTypes.REMOVE_TODO,
+      TodoActionTypes.REMOVE_TODO_SUCCESS,
+      TodoActionTypes.REMOVE_TODO_FAILURE
+    ],
+    method: 'DELETE',
+    endpoint: `/todo/${id}`
+  }
+});
