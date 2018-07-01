@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`login reducer INVALIDATE_LOGIN removes token 1`] = `
+Object {
+  "didInvalidate": true,
+  "isFetching": false,
+  "token": null,
+}
+`;
+
+exports[`login reducer RECEIVE_LOGIN sets token in state  1`] = `
+Object {
+  "didInvalidate": false,
+  "isFetching": false,
+  "token": "mock-jwt-token-from-api",
+}
+`;
+
+exports[`login reducer REQUEST_LOGIN displays spinner 1`] = `
+Object {
+  "didInvalidate": false,
+  "isFetching": true,
+  "token": null,
+}
+`;
+
+exports[`login reducer defaults to not fetching 1`] = `
+Object {
+  "didInvalidate": false,
+  "isFetching": false,
+  "token": null,
+}
+`;
