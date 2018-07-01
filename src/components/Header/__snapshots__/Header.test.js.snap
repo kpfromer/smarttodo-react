@@ -1,36 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header renders a menu bar 1`] = `
-<ul
-  className="navList"
+exports[`Header renders a login link when the user is not logged in 1`] = `
+<NavLink
+  activeClassName="active"
+  aria-current="page"
+  id="login"
+  to="/login"
 >
-  <NavLink
-    activeClassName="active"
-    aria-current="page"
-    to="/"
+  <WithStyles(Button)
+    color="inherit"
   >
-    Home
-  </NavLink>
-  <NavLink
-    activeClassName="active"
-    aria-current="page"
-    to="/settings"
-  >
-    Settings
-  </NavLink>
-</ul>
+    Login
+  </WithStyles(Button)>
+</NavLink>
 `;
 
-exports[`Header renders a title 1`] = `
-<h1
-  className="title"
+exports[`Header renders a logout link when the user is logged in 1`] = `
+<NavLink
+  activeClassName="active"
+  aria-current="page"
+  id="logout"
+  to="/logout"
 >
-  <NavLink
-    activeClassName="active"
-    aria-current="page"
-    to="/"
+  <WithStyles(Button)
+    color="inherit"
   >
-    Smarttodo
-  </NavLink>
-</h1>
+    Logout
+  </WithStyles(Button)>
+</NavLink>
+`;
+
+exports[`Header renders a material design AppBar 1`] = `
+<WithStyles(AppBar)
+  position="static"
+>
+  <WithStyles(Toolbar)>
+    <WithStyles(IconButton)
+      aria-label="Menu"
+      className="menuButton"
+      color="inherit"
+    >
+      <pure(Menu) />
+    </WithStyles(IconButton)>
+    <WithStyles(Typography)
+      className="flex"
+      color="inherit"
+      variant="title"
+    >
+      <NavLink
+        activeClassName="active"
+        aria-current="page"
+        to="/"
+      >
+        Smarttodo
+      </NavLink>
+    </WithStyles(Typography)>
+    <NavLink
+      activeClassName="active"
+      aria-current="page"
+      id="login"
+      to="/login"
+    >
+      <WithStyles(Button)
+        color="inherit"
+      >
+        Login
+      </WithStyles(Button)>
+    </NavLink>
+  </WithStyles(Toolbar)>
+</WithStyles(AppBar)>
 `;
