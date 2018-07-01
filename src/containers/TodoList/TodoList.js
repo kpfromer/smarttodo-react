@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import * as TodoActionCreators from '../../actions/todo';
+import { fetchTodos } from '../../actions/todo';
 
 import styles from './TodoList.module.scss';
 
@@ -21,6 +22,11 @@ export class TodoList extends Component {
     updateTodo: PropTypes.func.isRequired,
     removeTodo: PropTypes.func.isRequired
   };
+
+  constructor(props) {
+    super(props);
+    props.loadTodos();
+  }
 
   updateTodoByProp = propName => todo => value =>
     this.props.updateTodo(todo, {
@@ -66,7 +72,8 @@ export const mapStateToProps = state => ({
 const staticActions = {
   addTodo: TodoActionCreators.addTodo,
   updateTodo: TodoActionCreators.updateTodo,
-  removeTodo: TodoActionCreators.removeTodo
+  removeTodo: TodoActionCreators.removeTodo,
+  loadTodos: fetchTodos
 };
 
 export default connect(mapStateToProps, staticActions)(TodoList);

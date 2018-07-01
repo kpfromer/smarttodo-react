@@ -30,6 +30,15 @@ const { shallow: setup } = SetupComponent({
 describe('TodoList', () => {
   let wrapper;
 
+  it('loads todos on creation', () => {
+    const mockLoadTodos = jest.fn();
+    setup({
+      loadTodos: mockLoadTodos
+    });
+
+    expect(mockLoadTodos).toHaveBeenCalled();
+  });
+
   describe('given `todos`', () => {
     beforeEach(() => {
       ({ wrapper } = setup());
@@ -153,7 +162,3 @@ describe('mapStateToProps', () => {
     });
   });
 });
-
-
-
-// TODO: test for fetch todos
