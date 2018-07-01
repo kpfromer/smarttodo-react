@@ -5,16 +5,22 @@ import './normalize.scss';
 import './reset.scss';
 import './index.scss';
 
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import { Provider } from "react-redux";
 import Reducers from "./reducers/";
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import api from "./middleware/api/api";
 
 const store = createStore(
   Reducers,
-  window.devToolsExtension && window.devToolsExtension()
+  window.devToolsExtension && window.devToolsExtension(),
+  applyMiddleware(
+    api({
+      getAuthFromState: state => state.login.token
+    })
+  )
 );
 
 
