@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login user submits login form with username and password filled if credentials are invalid displays a snackbar message with the api error 1`] = `
+<WithStyles(Snackbar)
+  anchorOrigin={
+    Object {
+      "horizontal": "center",
+      "vertical": "bottom",
+    }
+  }
+  autoHideDuration={3000}
+  onClose={[Function]}
+  open={true}
+>
+  <WithStyles(MySnackbarContent)
+    message="Username/password were not found!"
+    onClose={[Function]}
+    variant="error"
+  />
+</WithStyles(Snackbar)>
+`;
+
+exports[`Login user submits login form with username and password filled if credentials are valid redirects user to /todo 1`] = `
+<Redirect
+  push={false}
+  to="/todo"
+/>
+`;
