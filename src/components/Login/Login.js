@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import { tryLogin } from "../../actions/login";
 import { Redirect, withRouter } from "react-router-dom";
 import Snackbar from "@material-ui/core/Snackbar";
-import { MySnackbarContentWrapper } from "../SpecialSnackbar";
+import SpecialSnackbar from "../SpecialSnackbar/SpecialSnackbar";
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
@@ -114,7 +114,7 @@ export class Login extends PureComponent {
           autoHideDuration={3000}
           onClose={this.handleClose}
         >
-          <MySnackbarContentWrapper
+          <SpecialSnackbar
             onClose={this.handleClose}
             variant="error"
             message={this.state.errorMessage}
