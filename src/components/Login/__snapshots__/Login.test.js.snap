@@ -12,7 +12,7 @@ exports[`Login user submits login form with username and password filled if cred
   onClose={[Function]}
   open={true}
 >
-  <WithStyles(MySnackbarContent)
+  <WithStyles(SpecialSnackbar)
     message="Username/password were not found!"
     onClose={[Function]}
     variant="error"
