@@ -2,7 +2,7 @@ import NotFound from "./NotFound";
 import { SetupComponent } from "react-component-setup";
 
 const { shallow: setup } = SetupComponent({
-  Component: NotFound
+  component: NotFound
 });
 
 describe('NotFound', () => {

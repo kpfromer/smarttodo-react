@@ -17,7 +17,7 @@ const todos = [
 ];
 
 const { shallow: setup } = SetupComponent({
-  Component: TodoList,
+  component: TodoList,
   defaultProps: {
     addTodo: () => {},
     updateTodo: () => {},

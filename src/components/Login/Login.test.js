@@ -5,7 +5,7 @@ import FormValidator from "../FormValidator/FormValidator";
 import Snackbar from "@material-ui/core/Snackbar";
 
 const { shallow: setup } = SetupComponent({
-  Component: Login
+  component: Login
 });
 
 describe('Login', () => {

@@ -3,7 +3,7 @@ import { SetupComponent } from "react-component-setup";
 import { PrivateRoute } from "./PrivateRoute";
 
 const { shallow: setup } = SetupComponent({
-  Component: PrivateRoute
+  component: PrivateRoute
 });
 
 const CustomComponent = () => (

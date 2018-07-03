@@ -2,7 +2,7 @@ import DescriptionForm from "./DescriptionForm";
 import { SetupComponent } from "react-component-setup";
 
 const { shallow: setup } = SetupComponent({
-  Component: DescriptionForm,
+  component: DescriptionForm,
   defaultProps: {
     onUpdate: newDescription => {}
   },

@@ -4,7 +4,7 @@ import { Header, mapStateToProps } from "./Header";
 import AppBar from '@material-ui/core/AppBar';
 
 const { shallow: setup } = SetupComponent({
-  Component: Header,
+  component: Header,
   defaultProps: {
     isAuthenticated: false
   }

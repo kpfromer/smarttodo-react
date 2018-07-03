@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 import { Switch } from "react-router-dom";
 
 const { shallow: setup } = SetupComponent({
-  Component: App
+  component: App
 });
 
 describe('App', () => {

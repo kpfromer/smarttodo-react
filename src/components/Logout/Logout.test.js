@@ -2,7 +2,7 @@ import { SetupComponent } from "react-component-setup";
 import { Logout } from "./Logout";
 
 const { shallow: setup } = SetupComponent({
-  Component: Logout
+  component: Logout
 });
 
 describe('Logout', () => {

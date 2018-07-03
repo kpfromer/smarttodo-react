@@ -3,7 +3,7 @@ import Todo from "./Todo";
 import DescriptionForm from "./DescriptionForm";
 
 const { shallow: setup } = SetupComponent({
-  Component: Todo,
+  component: Todo,
   defaultProps: {
     description: 'what todo?',
     completed: true,
