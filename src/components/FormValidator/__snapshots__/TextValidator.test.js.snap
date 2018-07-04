@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextValidator without context renders a TextField with value and other properties 1`] = `
+<TextField
+  error={false}
+  miscOptionsToBeAddedToTextField="hello world"
+  onChange={[Function]}
+  required={false}
+  select={false}
+  value="initial"
+/>
+`;
