@@ -75,15 +75,6 @@ Object {
 }
 `;
 
-exports[`todo actions updateTodo can revert back to old todo 1`] = `
-Object {
-  "todo": Object {
-    "completed": true,
-    "description": "NEW! description",
-  },
-}
-`;
-
 exports[`todo actions updateTodo creates an action to PUT a new todo 1`] = `
 Object {
   "data": Object {

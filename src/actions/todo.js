@@ -51,7 +51,7 @@ export const updateTodo = (prevTodo, newTodo, id) => {
     id,
     todo: newTodo,
     revert: {
-      todo: newTodoWithoutId
+      todo: prevTodo
     },
     [CALL_API]: {
       types: [

@@ -82,7 +82,9 @@ describe('todo actions', () => {
       expect(action.todo).toMatchSnapshot();
     });
     it('can revert back to old todo', () => {
-      expect(action.revert).toMatchSnapshot();
+      expect(action.revert).toEqual({
+        todo: prevTodo
+      });
     });
     it('creates an action to PUT a new todo', () => {
       expect(action[CALL_API]).toMatchSnapshot();
