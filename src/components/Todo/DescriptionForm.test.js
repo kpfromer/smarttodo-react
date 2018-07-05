@@ -1,5 +1,6 @@
 import DescriptionForm from "./DescriptionForm";
 import { SetupComponent } from "react-component-setup";
+import TextField from '@material-ui/core/TextField';
 
 const { shallow: setup } = SetupComponent({
   component: DescriptionForm,
@@ -9,7 +10,7 @@ const { shallow: setup } = SetupComponent({
   elementsToFind: [
     {
       name: 'input',
-      query: 'input'
+      query: TextField
     }
   ]
 });
@@ -23,48 +24,36 @@ describe('DescriptionForm', () => {
     expect(input).toHaveProp('value', 'default description')
   });
 
-  it('renders input with `className`', () => {
-    const { input } = setup({
-      className: 'NEW-CLASS'
-    });
-
-    expect(input).toHaveClassName('NEW-CLASS');
-  });
-
   it('display valid input', () => {
-    const { input } = setup({ invalidClassName: 'INVALID' });
+    const { input } = setup();
 
-    expect(input).not.toHaveClassName('INVALID');
+    expect(input).toHaveProp('error', false);
   });
 
   describe('user inputs text', () => {
-    let wrapper, description, invalidClassName;
+    let wrapper, description;
 
     beforeEach(() => {
-      invalidClassName = 'INVALID_INPUT';
-
-      ({ wrapper } = setup({
-        invalidClassName
-      }));
+      ({ wrapper } = setup());
 
       description = 'New Description';
 
-      wrapper.find('input').simulate('change', { target: { value: description } });
+      wrapper.find(TextField).simulate('change', { target: { value: description } });
     });
 
     it('updates input value', () => {
-      expect(wrapper.find('input')).toHaveProp('value', (description));
+      expect(wrapper.find(TextField)).toHaveProp('value', (description));
     });
 
     it('should be a valid input', () => {
-      expect(wrapper.find('input')).not.toHaveClassName(invalidClassName)
+      expect(wrapper.find(TextField)).toHaveProp('error', false);
     });
 
     describe('user removes all text', () => {
-      it('renders input with `invalidClassName`', () => {
-        wrapper.find('input').simulate('change', { target: { value: '' } });
+      it('renders an errored input', () => {
+        wrapper.find(TextField).simulate('change', { target: { value: '' } });
 
-        expect(wrapper.find('input')).toHaveClassName(invalidClassName);
+        expect(wrapper.find(TextField)).toHaveProp('error', true);
       });
     });
   });
@@ -81,7 +70,7 @@ describe('DescriptionForm', () => {
 
       newDescription = 'hello world!';
 
-      wrapper.find('input').simulate('change', { target: { value: newDescription } });
+      wrapper.find(TextField).simulate('change', { target: { value: newDescription } });
       wrapper.find('form').simulate('submit', { preventDefault: mockPreventDefault });
     });
 
@@ -94,7 +83,7 @@ describe('DescriptionForm', () => {
     });
 
     it('maintains input value', () => {
-      expect(wrapper.find('input')).toHaveProp('value', newDescription);
+      expect(wrapper.find(TextField)).toHaveProp('value', newDescription);
     });
   });
 
@@ -108,12 +97,12 @@ describe('DescriptionForm', () => {
 
       newDescription = 'it\'s wednesday my dudes';
 
-      wrapper.find('input').simulate('change', { target: { value: newDescription } });
+      wrapper.find(TextField).simulate('change', { target: { value: newDescription } });
       wrapper.find('form').simulate('submit', { preventDefault: () => {} });
     });
 
     it('clears value of input when submitted', () => {
-      expect(wrapper.find('input')).toHaveProp('value', '');
+      expect(wrapper.find(TextField)).toHaveProp('value', '');
     });
   });
 });

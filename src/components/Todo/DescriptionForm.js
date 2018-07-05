@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import TextField from '@material-ui/core/TextField';
+
 export default class DescriptionForm extends Component {
 
   static propTypes = {
     onUpdate: PropTypes.func.isRequired,
     description: PropTypes.string,
-    className: PropTypes.string,
-    invalidClassName: PropTypes.string,
     clearOnUpdate: PropTypes.bool
   };
 
   static defaultProps = {
     description: '',
-    className: '',
-    invalidClassName: '',
     clearOnUpdate: false
   };
 
@@ -46,14 +44,17 @@ export default class DescriptionForm extends Component {
 
   render() {
     const { description, invalid } = this.state;
-    const { className, invalidClassName } = this.props;
-    const invalidStyle = invalid ? invalidClassName : '';
     return (
       <form onSubmit={this.handleSubmit}>
-        <input
-          className={`${className} ${invalidStyle}`}
+        <TextField
           value={description}
+          error={invalid}
           onChange={this.updateDescription}
+          InputLabelProps={{
+            shrink: true
+          }}
+          fullWidth
+          margin="normal"
         />
       </form>
     );
