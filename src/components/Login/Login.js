@@ -56,7 +56,16 @@ export class Login extends PureComponent {
     })
   };
 
-  validate = value => !!value;
+  validate = name => ([
+    {
+      validate: value => !!value,
+      text: `${name} is required`
+    },
+    {
+      validate: value => value.length > 3,
+      text: `${name} must be more than 3 characters`
+    }
+  ]);
 
   render() {
     if (this.state.redirectToReferrer) {
@@ -81,9 +90,10 @@ export class Login extends PureComponent {
                   type="text"
                   fullWidth
                   name="username"
+                  autoComplete="username"
                   value={this.state.username}
                   onChange={this.updateValue('username')}
-                  validate={this.validate}
+                  validate={this.validate('Username')}
                 />
                 <TextValidator
                   autoFocus
@@ -91,10 +101,11 @@ export class Login extends PureComponent {
                   label="Password"
                   type="password"
                   name="password"
+                  autoComplete="current-password"
                   value={this.state.password}
                   fullWidth
                   onChange={this.updateValue('password')}
-                  validate={this.validate}
+                  validate={this.validate('Password')}
                 />
               </CardContent>
               <CardActions className={styles.cardActions}>

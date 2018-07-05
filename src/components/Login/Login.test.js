@@ -9,59 +9,56 @@ const { shallow: setup } = SetupComponent({
 });
 
 describe('Login', () => {
-  let wrapper, mockLogin;
+  let wrapper, mockLogin, get;
 
   beforeEach(() => {
+    get = name => wrapper.find(TextValidator).findWhere(node => node.prop('name') === name);
+
     mockLogin = jest.fn();
     ({ wrapper } = setup({
       login: mockLogin
     }));
   });
 
-  // TODO: dry!
-  describe('user enters username', () => {
-    let username, refresh, newValue;
+  [
+    {
+      type: 'username',
+      setup: () => 'example username'
+    },
+    {
+      type: 'password',
+      setup: () => 'example password'
+    }
+  ].forEach(value => {
+    const { type, setup } = value;
 
-    beforeEach(() => {
-      refresh = () => wrapper.find(TextValidator).findWhere(node => node.prop('name') === 'username');
-      username = refresh();
+    describe(`user enters ${type}`, () => {
+      let input, newValue;
 
-      newValue = 'example username';
+      beforeEach(() => {
+        input = get(type);
 
-      username.props().onChange({ value: newValue });
-      wrapper.update();
-      username = refresh();
-    });
+        newValue = setup();
 
-    it('username input value changes', () => {
-      expect(username).toHaveProp('value', newValue);
-    });
-    it('validates input', () => {
-      expect(username.props().validate('notempty')).toBe(true);
-      expect(username.props().validate('')).toBe(false);
-    });
-  });
-  
-  describe('user enters password', () => {
-    let password, refresh, newValue;
+        input.props().onChange({ value: newValue });
+        wrapper.update();
+        input = get(type);
+      });
 
-    beforeEach(() => {
-      refresh = () => wrapper.find(TextValidator).findWhere(node => node.prop('name') === 'password');
-      password = refresh();
+      it(`${type} input value changes`, () => {
+        expect(input).toHaveProp('value', newValue);
+      });
+      it('validates input', () => {
+        expect(input.props().validate).toMatchSnapshot();
 
-      newValue = 'example password';
+        const isRequired = input.props().validate.find(value => value.text.includes('is required')).validate;
+        const moreThanThree = input.props().validate.find(value => value.text.includes('must be more than 3 characters')).validate;
 
-      password.props().onChange({ value: newValue });
-      wrapper.update();
-      password = refresh();
-    });
-
-    it('password input value changes', () => {
-      expect(password).toHaveProp('value', newValue);
-    });
-    it('validates input', () => {
-      expect(password.props().validate('notempty')).toBe(true);
-      expect(password.props().validate('')).toBe(false);
+        expect(isRequired('hello')).toBe(true);
+        expect(isRequired('')).toBe(false);
+        expect(moreThanThree('3333')).toBe(true);
+        expect(moreThanThree('fff')).toBe(false);
+      });
     });
   });
 
