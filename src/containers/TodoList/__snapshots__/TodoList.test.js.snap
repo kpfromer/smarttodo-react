@@ -9,7 +9,7 @@ Array [
     onCheck={[Function]}
     onRemove={[Function]}
     onUpdate={[Function]}
-/>,
+  />,
   <Todo
     completed={true}
     description="computer science test"
@@ -17,7 +17,7 @@ Array [
     onCheck={[Function]}
     onRemove={[Function]}
     onUpdate={[Function]}
-/>,
+  />,
 ]
 `;
 

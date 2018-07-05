@@ -20,26 +20,6 @@ Object {
 }
 `;
 
-exports[`todo actions addTodo creates an api action to add a todo 1`] = `
-Object {
-  "data": Object {
-    "todos": Array [
-      Object {
-        "completed": true,
-        "description": "hello world",
-      },
-    ],
-  },
-  "endpoint": "/todo",
-  "method": "POST",
-  "types": Array [
-    "todo/ADD_TODO",
-    "todo/ADD_TODO_SUCCESS",
-    "todo/ADD_TODO_FAILURE",
-  ],
-}
-`;
-
 exports[`todo actions addTodo sends the todo 1`] = `
 Object {
   "completed": true,
