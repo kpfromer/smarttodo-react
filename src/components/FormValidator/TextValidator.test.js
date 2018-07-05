@@ -48,32 +48,184 @@ describe('TextValidator', () => {
     });
 
     describe('user enters text', () => {
-      let newValue, valid;
+      let newValue, valid, simulateChange, errorText;
 
       beforeEach(() => {
         newValue = 'new value';
         valid = false;
 
-        mockValidate.mockReturnValue(valid);
-
-        wrapper.find(TextField).props().onChange({ target: { value: newValue } });
-        wrapper.update();
+        simulateChange = () => {
+          wrapper.find(TextField).props().onChange({ target: { value: newValue } });
+          wrapper.update();
+        };
       });
+      // TODO: extract into library? pull request into jest-each?
+      // simple version of a parameterized test, see jest-each
+      // TODO: refactor even further, common setup - simulateChange, switch case based on type
+      [
+        {
+          type: 'function',
+          setup: () => {
+            mockValidate.mockReturnValue(valid);
+          }
+        },
+        {
+          type: 'object',
+          setup: () => {
+            errorText = 'A ERROR! AHHHHHHHH!';
+            wrapper.setProps({
+              validate: {
+                text: errorText,
+                validate: mockValidate
+              }
+            });
+          }
+        },
+        {
+          type: 'array',
+          setup: () => {
+            errorText = 'SECOND ERROR!';
+            wrapper.setProps({
+              validate: [
+                {
+                  text: 'FIRST',
+                  validate: () => true
+                },
+                {
+                  text: errorText,
+                  validate: mockValidate
+                }
+              ]
+            });
+          }
+        }
+      ].forEach(valueType => {
+        const { type, setup } = valueType;
+        describe(`when \`validate\` is a ${type}`, () => {
+          beforeEach(() => {
+            setup();
+            simulateChange();
+          });
 
-      it('validates value', () => {
-        expect(mockValidate).toHaveBeenCalledWith(newValue);
-      });
+          it('validates value', () => {
+            expect(mockValidate).toHaveBeenCalledWith(newValue);
+          });
 
-      it('passes change and validity up to parent component', () => {
-        expect(mockHandleChange).toHaveBeenCalledWith({
-          error: !valid,
-          value: newValue
+          it('passes change and validity up to parent component', () => {
+            expect(mockHandleChange).toHaveBeenCalledWith({
+              error: !valid,
+              value: newValue
+            });
+          });
+
+          it('renders TextField with error if invalid', () => {
+            expect(wrapper.find(TextField)).toHaveProp('error', true);
+          });
+
+          switch (type) {
+            case 'object':
+            case 'array':
+              it('renders error helperText', () => {
+                expect(wrapper.find(TextField)).toHaveProp('helperText', errorText);
+              });
+          }
         });
       });
 
-      it('renders TextField with error if invalid', () => {
-        expect(wrapper.find(TextField)).toHaveProp('error', true);
-      });
+
+      // describe('when `validate` is a function', () => {
+      //   beforeEach(() => {
+      //     mockValidate.mockReturnValue(valid);
+      //     simulateChange();
+      //   });
+      //
+      //   it('validates value', () => {
+      //     expect(mockValidate).toHaveBeenCalledWith(newValue);
+      //   });
+      //
+      //   it('passes change and validity up to parent component', () => {
+      //     expect(mockHandleChange).toHaveBeenCalledWith({
+      //       error: !valid,
+      //       value: newValue
+      //     });
+      //   });
+      //
+      //   it('renders TextField with error if invalid', () => {
+      //     expect(wrapper.find(TextField)).toHaveProp('error', true);
+      //   });
+      // });
+      //
+      // describe('when `validate` is an object', () => {
+      //   let errorText;
+      //   beforeEach(() => {
+      //     errorText = 'A ERROR! AHHHHHHHH!';
+      //     wrapper.setProps({
+      //       validate: {
+      //         text: errorText,
+      //         validate: mockValidate
+      //       }
+      //     });
+      //     simulateChange();
+      //   });
+      //
+      //   it('validates value', () => {
+      //     expect(mockValidate).toHaveBeenCalledWith(newValue);
+      //   });
+      //
+      //   it('passes change and validity up to parent component', () => {
+      //     expect(mockHandleChange).toHaveBeenCalledWith({
+      //       error: !valid,
+      //       value: newValue
+      //     });
+      //   });
+      //
+      //   it('renders TextField with error if invalid', () => {
+      //     expect(wrapper.find(TextField)).toHaveProp('error', true);
+      //   });
+      //
+      //   it('renders error helperText', () => {
+      //     expect(wrapper.find(TextField)).toHaveProp('helperText', errorText);
+      //   });
+      // });
+      //
+      // describe('when `validate` is an array', () => {
+      //   let errorText;
+      //   beforeEach(() => {
+      //     errorText = 'SECOND ERROR!';
+      //     wrapper.setProps({
+      //       validate: [
+      //         {
+      //           text: 'FIRST',
+      //           validate: () => true
+      //         },
+      //         {
+      //           text: errorText,
+      //           validate: mockValidate
+      //         }
+      //       ]
+      //     });
+      //     simulateChange();
+      //   });
+      //
+      //   it('validates value', () => {
+      //     expect(mockValidate).toHaveBeenCalledWith(newValue);
+      //   });
+      //
+      //   it('passes change and validity up to parent component', () => {
+      //     expect(mockHandleChange).toHaveBeenCalledWith({
+      //       error: !valid,
+      //       value: newValue
+      //     });
+      //   });
+      //
+      //   it('renders TextField with error if invalid', () => {
+      //     expect(wrapper.find(TextField)).toHaveProp('error', true);
+      //   });
+      //
+      //   it('renders error helperText', () => {
+      //     expect(wrapper.find(TextField)).toHaveProp('helperText', errorText);
+      //   });
+      // });
     });
   });
 

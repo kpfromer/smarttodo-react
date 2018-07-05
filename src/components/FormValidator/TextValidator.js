@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { isArray, isPlainObject } from 'lodash';
+
 import { ValidatorContext } from './ValidatorContext';
 import TextField from '@material-ui/core/TextField';
+
+const validateShape = PropTypes.shape({
+  text: PropTypes.string.isRequired,
+  validate: PropTypes.func.isRequired
+}).isRequired;
 
 export class TextValidator extends Component {
 
   static propTypes = {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    validate: PropTypes.func.isRequired,
+    validate: PropTypes.oneOfType([
+      PropTypes.func,
+      PropTypes.arrayOf(validateShape),
+      validateShape
+    ]).isRequired,
     name: PropTypes.string,
     updateFormInput: PropTypes.func,
     initializeInput: PropTypes.func,
@@ -17,19 +28,44 @@ export class TextValidator extends Component {
   };
 
   state = {
-    error: false
+    error: false,
+    errorText: ''
   };
 
   validateValue = value => {
     const { updateFormInput, validate, name } = this.props;
-    const error = !validate(value);
+
+    let error = false;
+    let errorText = '';
+
+    const validatationObject = validateObj => {
+      const isError = !validateObj.validate(value);
+      if (isError) {
+        error = true;
+        errorText = validateObj.text;
+      }
+    };
+
+    if (isArray(validate)) {
+      for (const validateObj of validate) {
+        validatationObject(validateObj);
+        if (error) {
+          break;
+        }
+      }
+    } else if (isPlainObject(validate)) {
+      validatationObject(validate);
+    } else {
+      error = !validate(value);
+    }
+
     if (updateFormInput) {
       updateFormInput({
         name,
         error
       });
     }
-    this.setState({ error });
+    this.setState({ error, errorText });
 
     return { error };
   };
@@ -69,12 +105,13 @@ export class TextValidator extends Component {
   };
 
   render() {
-    const { onChange, validate, name, updateFormInput, ...textFieldProps } = this.props;
+    const { onChange, validate, name, ...textFieldProps } = this.props; // TODO: move textFieldProps to own prop
     return (
       <TextField
         {...textFieldProps}
         error={this.state.error}
         onChange={this.handleChange}
+        helperText={this.state.errorText}
       />
     );
   }
