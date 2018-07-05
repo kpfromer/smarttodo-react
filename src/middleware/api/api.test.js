@@ -19,6 +19,8 @@ describe('api middleware', () => {
     }
   });
 
+  // TODO: is returns rejected error and resolved response in dispatch(event).then()...
+
   it('errors if endpoint is not a string', () => {
     const handler = () => {
       middleware(undefined, undefined, {
@@ -102,6 +104,39 @@ describe('api middleware', () => {
     expect(callApi.default.mock.calls[0][4]).toBe(token);
   });
 
+  it('rejects api error message', async () => {
+    const message = '500 error';
+
+    callApi.default.mockReturnValue(Promise.reject({
+      response: {
+        data: {
+          message
+        }
+      }
+    }));
+
+    await expect(middleware(() => {}, next => next, {
+      [CALL_API]: {
+        ...valid,
+        authenticate: false
+      }
+    })).rejects.toHaveProperty('error', message);
+  });
+
+  it('rejects a default error message if api doesn\'t supply it', async () => {
+    callApi.default.mockReturnValue(Promise.reject({
+      data: {}
+    }));
+    // const error = await middleware(() => {}, () => {}, valid);
+
+    await expect(middleware(() => {}, next => next, {
+      [CALL_API]: {
+        ...valid,
+        authenticate: false
+      }
+    })).rejects.toMatchSnapshot();
+  });
+
   describe('dispatch', () => {
     let actionData, mockDispatch;
     beforeEach(() => {
@@ -153,25 +188,30 @@ describe('api middleware', () => {
         response: apiData
       });
     });
-    it('dispatches failure type with action data with callApi error message', async () => {
+    it('dispatches failure type with action data with callApi error message', () => {
+      expect.assertions(1);
       const message = 'A 500 error happened!';
 
-      callApi.default.mockReturnValue(Promise.reject({
-        message
+      callApi.default.mockImplementation(() => Promise.reject({
+        response: {
+          data: {
+            message
+          }
+        }
       }));
 
-      await middleware(jest.fn(), mockDispatch, {
+      return apiDefault()(jest.fn())(mockDispatch) ({
         ...actionData,
         [CALL_API]: {
           ...valid,
           authenticate: false
         }
-      });
-
-      expect(mockDispatch.mock.calls[1][0]).toEqual({
-        type: 'FAILURE',
-        ...actionData,
-        error: message
+      }).catch(() => {
+        expect(mockDispatch.mock.calls[1][0]).toEqual({
+          type: 'FAILURE',
+          ...actionData,
+          error: message
+        });
       });
     });
   });

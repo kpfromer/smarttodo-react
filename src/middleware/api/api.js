@@ -1,4 +1,5 @@
 import CallApi from './CallApi';
+import { get } from 'lodash';
 
 export const API_ROOT = 'http://localhost:3001/v1';
 export const CALL_API = 'call/CALL_API';
@@ -65,9 +66,18 @@ export default ({ getAuthFromState } = { getAuthFromState: val => val }) => stor
       response,
       type: successType
     })),
-    error => next(actionWith({
-      type: failureType,
-      error: error.message || 'Something bad happened'
-    }))
+    error => {
+      const defaultMessage = 'Something went wrong!';
+      let errorMessage = get(error, 'response.data.message', defaultMessage);
+
+      if (typeof errorMessage !== 'string') { // todo: fix so errorMessage can be an array
+        errorMessage = defaultMessage;
+      }
+
+      return Promise.reject(next(actionWith({
+        type: failureType,
+        error: errorMessage // todo fix with backend when constraints don't match!
+      })))
+    }
   )
 };
