@@ -1,7 +1,5 @@
-@import '../../theme';
-
 .mainContainer {
-  background-color: $main-color;
+  background-color: #3573E7;
 }
 
 .title {
@@ -25,7 +23,7 @@
   text-transform: uppercase;
 }
 
-@media (min-width: $sm) {
+@media (min-width: 769px) {
   .navContainer,
   .navList {
     display: flex;
@@ -37,7 +35,7 @@
   }
 }
 
-@media (min-width: $md) {
+@media (min-width: 1125px) {
   .navContainer,
   .navList {
     flex-direction: row;

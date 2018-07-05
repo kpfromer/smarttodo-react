@@ -7,10 +7,9 @@
     "@material-ui/icons": "^1.1.0",
     "axios": "^0.18.0",
     "classnames": "latest",
-    "custom-react-scripts": "^0.2.2",
+    "react-scripts": "^2.0.0-next.3e165448",
     "lodash": "^4.17.10",
-    "prop-types": "latest",
-    "proptypes": "^1.1.0",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
@@ -41,6 +40,19 @@
       "!src/setupTests.js",
       "!src/registerServiceWorker.js",
       "!/node_modules/"
+    ]
+  },
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [
+      ">1%",
+      "last 4 versions",
+      "Firefox ESR",
+      "not ie < 11"
     ]
   }
 }

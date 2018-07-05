@@ -13,7 +13,7 @@ import CardContent from '@material-ui/core/CardContent';
 import FormValidator from "../FormValidator/FormValidator";
 import TextValidator from "../FormValidator/TextValidator";
 
-import styles from './Login.module.scss';
+import styles from './Login.module.css';
 
 export class Login extends PureComponent {
 

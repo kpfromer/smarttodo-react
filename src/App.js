@@ -8,7 +8,7 @@ import Login from "./components/Login/Login";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import Logout from "./components/Logout/Logout";
 
-import styles from './App.module.scss'
+import styles from './App.module.css'
 
 
 class App extends Component {

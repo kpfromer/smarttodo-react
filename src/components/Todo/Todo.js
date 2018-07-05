@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
 
-import styles from './Todo.module.scss'
+import styles from './Todo.module.css'
 
 import DescriptionForm from "./DescriptionForm";
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import './normalize.scss';
-import './reset.scss';
-import './index.scss';
+import './normalize.css';
+import './reset.css';
+import './index.css';
 
 import { applyMiddleware, createStore } from 'redux';
 import { Provider } from "react-redux";

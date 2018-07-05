@@ -1,4 +1,3 @@
-@import './theme';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
@@ -18,13 +17,13 @@ button {
   color: inherit;
 }
 
-@media (min-width: $sm) {
+@media (min-width: 769px) {
   .container {
     width: 90%;
     margin: 0 auto;
   }
 }
-@media (min-width: $md) {
+@media (min-width: 1125px) {
   .container {
     width: 80%;
     max-width: 1150px;

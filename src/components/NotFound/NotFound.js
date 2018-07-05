@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import styles from './NotFound.module.scss';
+import styles from './NotFound.module.css';
 
 export default class NotFound extends PureComponent {
   render() {

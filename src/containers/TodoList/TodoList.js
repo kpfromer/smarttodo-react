@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as TodoActionCreators from '../../actions/todo';
 import { fetchTodos } from '../../actions/todo';
 
-import styles from './TodoList.module.scss';
+import styles from './TodoList.module.css';
 
 import Todo from "../../components/Todo/Todo";
 import DescriptionForm from "../../components/Todo/DescriptionForm";
