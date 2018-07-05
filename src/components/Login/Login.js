@@ -84,28 +84,32 @@ export class Login extends PureComponent {
                   Login
                 </Typography>
                 <TextValidator
-                  autoFocus
-                  margin="dense"
-                  label="Username"
-                  type="text"
-                  fullWidth
                   name="username"
-                  autoComplete="username"
                   value={this.state.username}
                   onChange={this.updateValue('username')}
                   validate={this.validate('Username')}
+                  textFieldProps={{
+                    autoFocus: true,
+                    margin: 'dense',
+                    label: 'Username',
+                    type: 'text',
+                    // autoComplete: 'username',
+                    fullWidth: true
+                  }}
                 />
                 <TextValidator
-                  autoFocus
-                  margin="dense"
-                  label="Password"
-                  type="password"
                   name="password"
-                  autoComplete="current-password"
                   value={this.state.password}
-                  fullWidth
                   onChange={this.updateValue('password')}
                   validate={this.validate('Password')}
+                  textFieldProps={{
+                    autoFocus: true,
+                    margin: 'dense',
+                    label: 'Password',
+                    type: 'password',
+                    // autoComplete: 'current-password',
+                    fullWidth: true
+                  }}
                 />
               </CardContent>
               <CardActions className={styles.cardActions}>

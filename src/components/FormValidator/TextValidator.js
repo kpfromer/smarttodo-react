@@ -21,6 +21,7 @@ export class TextValidator extends Component {
       PropTypes.arrayOf(validateShape),
       validateShape
     ]).isRequired,
+    textFieldProps: PropTypes.object,
     name: PropTypes.string,
     updateFormInput: PropTypes.func,
     initializeInput: PropTypes.func,
@@ -105,13 +106,15 @@ export class TextValidator extends Component {
   };
 
   render() {
-    const { onChange, validate, name, ...textFieldProps } = this.props; // TODO: move textFieldProps to own prop
+    const { value, textFieldProps } = this.props;
+    const { error, errorText } = this.state;
     return (
       <TextField
         {...textFieldProps}
-        error={this.state.error}
+        value={value}
+        error={error}
         onChange={this.handleChange}
-        helperText={this.state.errorText}
+        helperText={errorText}
       />
     );
   }

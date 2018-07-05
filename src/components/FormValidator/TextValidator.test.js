@@ -36,7 +36,9 @@ describe('TextValidator', () => {
           value: 'initial',
           onChange: mockHandleChange,
           validate: mockValidate,
-          miscOptionsToBeAddedToTextField: 'hello world'
+          textFieldProps: {
+            miscOptionsToBeAddedToTextField: 'hello world'
+          }
         }
       });
 
