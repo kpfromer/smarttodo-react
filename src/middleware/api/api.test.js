@@ -20,7 +20,6 @@ describe('api middleware', () => {
   });
 
   // TODO: is returns rejected error and resolved response in dispatch(event).then()...
-
   it('errors if endpoint is not a string', () => {
     const handler = () => {
       middleware(undefined, undefined, {
@@ -200,7 +199,7 @@ describe('api middleware', () => {
         }
       }));
 
-      return apiDefault()(jest.fn())(mockDispatch) ({
+      return middleware(jest.fn(), mockDispatch, {
         ...actionData,
         [CALL_API]: {
           ...valid,
