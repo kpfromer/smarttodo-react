@@ -1,7 +1,7 @@
 import { mapStateToProps, TodoList } from "./TodoList";
 import { SetupComponent } from "react-component-setup";
 import Todo from "../../components/Todo/Todo";
-import DescriptionForm from "../../components/Todo/DescriptionForm";
+import NewTodo from "../../components/Todo/NewTodo";
 
 const todos = [
   {
@@ -53,13 +53,13 @@ describe('TodoList', () => {
     });
   });
 
-  it('renders a DescriptionForm in the list', () => {
+  it('renders a NewTodo in the list', () => {
     ({ wrapper } = setup());
 
-    expect(wrapper.find('ul').find(DescriptionForm)).toMatchSnapshot();
+    expect(wrapper.find(NewTodo)).toExist();
   });
 
-  describe('on DescriptionForm update', () => {
+  describe('on NewTodo create', () => {
     let mockAddTodo;
 
     beforeEach(() => {
@@ -69,7 +69,8 @@ describe('TodoList', () => {
         addTodo: mockAddTodo
       }));
 
-      wrapper.find(DescriptionForm).props().onUpdate('new description');
+      wrapper.find(NewTodo).props().onCreate('new description');
+      wrapper.update();
     });
 
     it('creates a new Todo', () => {

@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import * as TodoActionCreators from '../../actions/todo';
 import { fetchTodos } from '../../actions/todo';
 
-import styles from './TodoList.module.css';
-
+import List from '@material-ui/core/List';
 import Todo from "../../components/Todo/Todo";
-import DescriptionForm from "../../components/Todo/DescriptionForm";
+import NewTodo from "../../components/Todo/NewTodo";
 
 export class TodoList extends Component {
 
@@ -54,12 +53,7 @@ export class TodoList extends Component {
     return (
       <ul className={styles.list}>
         {todoItems}
-        <DescriptionForm
-          clearOnUpdate
-          className={styles.newTodo}
-          invalidClassName={styles.invalid}
-          onUpdate={addTodo}
-        />
+        <NewTodo onCreate={addTodo} />
       </ul>
     );
   }

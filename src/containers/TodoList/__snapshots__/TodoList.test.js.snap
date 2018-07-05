@@ -20,13 +20,3 @@ Array [
   />,
 ]
 `;
-
-exports[`TodoList renders a DescriptionForm in the list 1`] = `
-<DescriptionForm
-  className="newTodo"
-  clearOnUpdate={true}
-  description=""
-  invalidClassName="invalid"
-  onUpdate={[Function]}
-/>
-`;

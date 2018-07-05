@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewTodo renders a DescriptionForm that clears on update 1`] = `
+<WithStyles(ListItem)>
+  <WithStyles(ListItemText)>
+    <DescriptionForm
+      clearOnUpdate={true}
+      description=""
+      onUpdate={[Function]}
+    />
+  </WithStyles(ListItemText)>
+</WithStyles(ListItem)>
+`;
