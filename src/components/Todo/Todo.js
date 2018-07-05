@@ -59,7 +59,7 @@ export default class Todo extends Component {
       </ListItemText>;
 
     return (
-      <ListItem>
+      <ListItem divider>
         {body}
       </ListItem>
     );
