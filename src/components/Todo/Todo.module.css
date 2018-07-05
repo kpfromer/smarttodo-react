@@ -67,7 +67,7 @@
   text-decoration: line-through;
 }
 
-// TODO: fix padding margin top
+/* TODO: fix padding margin top */
 .todo .destroy {
   display: none;
   position: absolute;
