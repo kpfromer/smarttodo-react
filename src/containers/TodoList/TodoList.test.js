@@ -1,5 +1,6 @@
 import { mapStateToProps, TodoList } from "./TodoList";
 import { SetupComponent } from "react-component-setup";
+import List from '@material-ui/core/List';
 import Todo from "../../components/Todo/Todo";
 import NewTodo from "../../components/Todo/NewTodo";
 
@@ -45,11 +46,11 @@ describe('TodoList', () => {
     });
 
     it('renders a list', () => {
-      expect(wrapper.is('ul')).toBe(true);
+      expect(wrapper.is(List)).toBe(true);
     });
 
     it('renders a list of Todos', () => {
-      expect(wrapper.find('ul').find(Todo)).toMatchSnapshot();
+      expect(wrapper.find(List).find(Todo)).toMatchSnapshot();
     });
   });
 

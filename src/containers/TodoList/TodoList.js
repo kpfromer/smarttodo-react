@@ -51,10 +51,10 @@ export class TodoList extends Component {
       />
     );
     return (
-      <ul className={styles.list}>
+      <List>
         {todoItems}
         <NewTodo onCreate={addTodo} />
-      </ul>
+      </List>
     );
   }
 }
