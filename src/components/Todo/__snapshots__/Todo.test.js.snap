@@ -1,33 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Todo renders a checkbox and displays \`description\` label 1`] = `
-<div
-  className="view"
->
-  <input
-    checked={true}
-    className="toggle"
-    onChange={[Function]}
-    type="checkbox"
-  />
-  <label
-    onDoubleClick={[Function]}
-  >
-    what todo?
-  </label>
-  <button
-    className="destroy"
-    onClick={[Function]}
-  />
-</div>
-`;
-
-exports[`Todo renders the DescriptionForm for editing 1`] = `
+exports[`Todo on ListItemText click renders the DescriptionForm for editing 1`] = `
 <DescriptionForm
-  className="edit"
   clearOnUpdate={false}
   description="what todo?"
-  invalidClassName="invalid"
   onUpdate={[Function]}
 />
+`;
+
+exports[`Todo renders a checkbox and displays \`description\` label 1`] = `
+<WithStyles(ListItem)>
+  <React.Fragment>
+    <WithStyles(Checkbox)
+      checked={true}
+      onChange={[Function]}
+      tabIndex={1}
+    />
+    <WithStyles(ListItemText)
+      onClick={[Function]}
+    >
+      what todo?
+    </WithStyles(ListItemText)>
+    <WithStyles(ListItemSecondaryAction)>
+      <WithStyles(IconButton)
+        aria-label="Delete"
+        onClick={[Function]}
+      >
+        <pure(Delete) />
+      </WithStyles(IconButton)>
+    </WithStyles(ListItemSecondaryAction)>
+  </React.Fragment>
+</WithStyles(ListItem)>
 `;

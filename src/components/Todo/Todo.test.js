@@ -1,6 +1,10 @@
 import { SetupComponent } from "react-component-setup";
 import Todo from "./Todo";
 import DescriptionForm from "./DescriptionForm";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
 
 const { shallow: setup } = SetupComponent({
   component: Todo,
@@ -21,12 +25,7 @@ describe('Todo', () => {
 
   it('renders a checkbox and displays `description` label', () => {
     const { wrapper } = setup();
-    expect(wrapper.find('.view')).toMatchSnapshot();
-  });
-
-  it('renders the DescriptionForm for editing', () => {
-    const { wrapper } = setup();
-    expect(wrapper.find(DescriptionForm)).toMatchSnapshot();
+    expect(wrapper.find(ListItem)).toMatchSnapshot();
   });
 
   describe('on checkbox click', () => {
@@ -37,7 +36,8 @@ describe('Todo', () => {
 
       ({ wrapper } = setup({ onCheck: mockCheck }));
 
-      wrapper.find('input').simulate('change', { target: { checked: false } });
+      wrapper.find(Checkbox).props().onChange({ target: { checked: false } });
+      wrapper.update();
     });
 
     it('runs `onCheck` with id and checked value', () => {
@@ -45,7 +45,7 @@ describe('Todo', () => {
     });
   });
 
-  describe('on label double click', () => {
+  describe('on ListItemText click', () => {
     let wrapper, mockUpdate;
 
     beforeEach(() => {
@@ -55,16 +55,17 @@ describe('Todo', () => {
         onUpdate: mockUpdate
       }));
 
-      wrapper.find('label').simulate('doubleClick');
+      wrapper.find(ListItemText).simulate('click');
     });
 
-    it('renders Todo with editing `className`', () => {
-      expect(wrapper).toHaveClassName('editing');
+    it('renders the DescriptionForm for editing', () => {
+      expect(wrapper.find(DescriptionForm)).toMatchSnapshot();
     });
 
     describe('on DescriptionForm update', () => {
       beforeEach(() => {
         wrapper.find(DescriptionForm).props().onUpdate('new description');
+        wrapper.update();
       });
 
       it('runs `onUpdate` with id and updated description', () => {
@@ -73,7 +74,7 @@ describe('Todo', () => {
     });
   });
 
-  describe('on remove button click', () => {
+  describe('on DeleteIcon click', () => {
     let wrapper, mockRemove;
 
     beforeEach(() => {
@@ -84,7 +85,7 @@ describe('Todo', () => {
         onRemove: mockRemove
       }));
 
-      wrapper.find('button').simulate('click');
+      wrapper.find(IconButton).simulate('click');
     });
 
     it('runs `onRemove` with id', () => {

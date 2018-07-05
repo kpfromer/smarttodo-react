@@ -1,9 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from 'prop-types';
 
-import styles from './Todo.module.css'
-
 import DescriptionForm from "./DescriptionForm";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import Checkbox from '@material-ui/core/Checkbox';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default class Todo extends Component {
 
@@ -33,28 +37,31 @@ export default class Todo extends Component {
   render() {
     const { description, completed } = this.props;
 
-    const completedStyle = completed ? styles.completed : '';
-    const editingStyle = this.state.editing ? styles.editing : '';
+    const body = !this.state.editing ?
+      <Fragment>
+        <Checkbox
+          checked={completed}
+          onChange={this.checkTodo}
+          tabIndex={1}
+        />
+        <ListItemText onClick={this.startEditing}>
+          {description}
+        </ListItemText>
+        <ListItemSecondaryAction>
+          <IconButton onClick={this.removeTodo} aria-label="Delete">
+            <DeleteIcon />
+          </IconButton>
+        </ListItemSecondaryAction>
+      </Fragment>
+      :
+      <ListItemText>
+        <DescriptionForm description={description} onUpdate={this.handleUpdate}/>
+      </ListItemText>;
 
     return (
-      <li className={`${styles.todo} ${completedStyle} ${editingStyle}`}>
-        <div className={styles.view}>
-          <input
-            className={styles.toggle}
-            type="checkbox"
-            checked={completed}
-            onChange={this.checkTodo}
-          />
-          <label onDoubleClick={this.startEditing}>{description}</label>
-          <button className={styles.destroy} onClick={this.removeTodo}/>
-        </div>
-        <DescriptionForm
-          className={styles.edit}
-          invalidClassName={styles.invalid}
-          description={description}
-          onUpdate={this.handleUpdate}
-        />
-      </li>
+      <ListItem>
+        {body}
+      </ListItem>
     );
   }
 }
