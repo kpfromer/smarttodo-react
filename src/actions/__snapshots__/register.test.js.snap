@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`register actions tryRegister creates an action to POST user details 1`] = `
+Object {
+  "authenticate": false,
+  "data": Object {
+    "email": "exampleEmail@email.org",
+    "firstName": "firstIsMyName",
+    "lastName": "lastIsMyName",
+    "password": "examplePassword",
+    "username": "exampleUsername",
+  },
+  "endpoint": "/register",
+  "method": "POST",
+  "types": Array [
+    "register/REQUEST_REGISTER",
+    "register/RECEIVE_REGISTER",
+    "register/FAILURE_REGISTER",
+  ],
+}
+`;
