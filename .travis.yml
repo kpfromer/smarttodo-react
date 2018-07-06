@@ -8,4 +8,9 @@ install:
   - npm install
 script:
   - npm test
-  - npm run build
+  - npm run build:prod
+deploy:
+  provider: surge
+  project: ./build/
+  domain: smarttodo-test.surge.sh
+  skip_cleanup: true
