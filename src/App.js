@@ -11,22 +11,26 @@ import Logout from "./components/Logout/Logout";
 import Register from "./components/Register/Register";
 
 import styles from './App.module.css'
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className={styles.container}>
-          <Header/>
-          <Switch>
-            <PrivateRoute path="/todo" component={TodoList}/>
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/logout" component={Logout}/>
-            <Route component={NotFound}/>
-          </Switch>
-        </div>
-        <GlobalSnackbar />
+        <ErrorBoundary>
+          <div className={styles.container}>
+            <Header/>
+            <Switch>
+              <PrivateRoute path="/todo" component={TodoList}/>
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/logout" component={Logout}/>
+              <Route component={NotFound}/>
+            </Switch>
+          </div>
+          <GlobalSnackbar />
+        </ErrorBoundary>
       </BrowserRouter>
     );
   }

@@ -9,6 +9,11 @@ exports[`App renders routes 1`] = `
   <Route
     component={[Function]}
     exact={true}
+    path="/register"
+  />
+  <Route
+    component={[Function]}
+    exact={true}
     path="/login"
   />
   <Route
