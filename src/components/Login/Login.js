@@ -12,7 +12,6 @@ import FormValidator from "../FormValidator/FormValidator";
 
 import styles from './Login.module.css';
 import TextValidated from "../FormValidator/TextValidated";
-import { changeSnackbar } from "../../actions/snackbar";
 
 export class Login extends PureComponent {
 
