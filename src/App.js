@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Header from "./components/Header/Header";
@@ -16,17 +16,19 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div className={styles.container}>
-          <Header/>
-          <Switch>
-            <PrivateRoute path="/todo" component={TodoList}/>
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login}/>
-            <Route exact path="/logout" component={Logout}/>
-            <Route component={NotFound}/>
-          </Switch>
-        </div>
-        <GlobalSnackbar />
+        <Fragment>
+          <div className={styles.container}>
+            <Header/>
+            <Switch>
+              <PrivateRoute path="/todo" component={TodoList}/>
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login}/>
+              <Route exact path="/logout" component={Logout}/>
+              <Route component={NotFound}/>
+            </Switch>
+          </div>
+          <GlobalSnackbar />
+        </Fragment>
       </BrowserRouter>
     );
   }
