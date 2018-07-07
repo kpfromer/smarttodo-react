@@ -2,21 +2,22 @@ import { Login } from "./Login";
 import { SetupComponent } from "react-component-setup";
 import TextValidated from "../FormValidator/TextValidated";
 import FormValidator from "../FormValidator/FormValidator";
-import Snackbar from "@material-ui/core/Snackbar";
 
 const { shallow: setup } = SetupComponent({
   component: Login
 });
 
 describe('Login', () => {
-  let wrapper, mockLogin, get;
+  let wrapper, mockLogin, mockChangeSnackbar, get;
 
   beforeEach(() => {
     get = name => wrapper.find(TextValidated).findWhere(node => node.prop('name') === name);
 
     mockLogin = jest.fn();
+    mockChangeSnackbar = jest.fn();
     ({ wrapper } = setup({
-      login: mockLogin
+      login: mockLogin,
+      changeSnackbar: mockChangeSnackbar
     }));
   });
 
@@ -49,6 +50,9 @@ describe('Login', () => {
       it('redirects user to /todo', () => {
         expect(wrapper).toMatchSnapshot();
       });
+      it('changes snackbar message to success', () => {
+        expect(mockChangeSnackbar.mock.calls[0][0]).toMatchSnapshot();
+      });
     });
 
     describe('if credentials are invalid', () => {
@@ -69,15 +73,8 @@ describe('Login', () => {
       it('removes password', () => {
         expect(findTextValidatedByName('password')).toHaveProp('value', '');
       });
-      it('displays a snackbar message with the api error', () => {
-        expect(wrapper.find(Snackbar)).toMatchSnapshot();
-      });
-      describe('error snackbar', () => {
-        it('closes when the X icon is clicked', () => {
-          wrapper.find(Snackbar).props().onClose();
-          wrapper.update();
-          expect(wrapper.find(Snackbar)).toHaveProp('open', false);
-        });
+      it('changes snackbar message to error', () => {
+        expect(mockChangeSnackbar.mock.calls[0][0]).toMatchSnapshot();
       });
     });
   });
