@@ -16,6 +16,6 @@ export const maxLength = maxValue => ({
 });
 
 export const email = isEmail => ({
-  hint: name => isEmail ? `Must be a valid email` : '',
+  hint: () => isEmail ? `Must be a valid email` : '',
   validate: value => isEmail ? validateIsEmail(value) : true
 });
