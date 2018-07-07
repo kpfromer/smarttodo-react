@@ -4,16 +4,15 @@ import { connect } from 'react-redux';
 import Card from '@material-ui/core/Card';
 import { tryLogin } from "../../actions/login";
 import { Redirect, withRouter } from "react-router-dom";
-import Snackbar from "@material-ui/core/Snackbar";
-import SpecialSnackbar from "../SpecialSnackbar/SpecialSnackbar";
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import FormValidator from "../FormValidator/FormValidator";
-import TextValidator from "../FormValidator/TextValidator";
 
 import styles from './Login.module.css';
+import TextValidated from "../FormValidator/TextValidated";
+import { changeSnackbar } from "../../actions/snackbar";
 
 export class Login extends PureComponent {
 
@@ -83,11 +82,13 @@ export class Login extends PureComponent {
                 <Typography variant="title">
                   Login
                 </Typography>
-                <TextValidator
+                <TextValidated
                   name="username"
+                  hintName="Username"
+                  required
+                  minLength={4}
                   value={this.state.username}
                   onChange={this.updateValue('username')}
-                  validate={this.validate('Username')}
                   textFieldProps={{
                     autoFocus: true,
                     margin: 'dense',
@@ -97,11 +98,13 @@ export class Login extends PureComponent {
                     fullWidth: true
                   }}
                 />
-                <TextValidator
+                <TextValidated
                   name="password"
+                  hintName="Password"
+                  required
+                  minLength={4}
                   value={this.state.password}
                   onChange={this.updateValue('password')}
-                  validate={this.validate('Password')}
                   textFieldProps={{
                     autoFocus: true,
                     margin: 'dense',
