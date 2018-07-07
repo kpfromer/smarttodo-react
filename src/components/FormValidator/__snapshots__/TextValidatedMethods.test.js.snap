@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextValidatedMethods email creates a hint with the input name 1`] = `"Must be a valid email"`;
+
+exports[`TextValidatedMethods maxLength creates a hint with the input name 1`] = `"hintName must be 5 characters or less"`;
+
+exports[`TextValidatedMethods minLength creates a hint with the input name 1`] = `"hintName must be 5 characters or more"`;
+
+exports[`TextValidatedMethods required creates a hint with the input name 1`] = `"hintName is required"`;
