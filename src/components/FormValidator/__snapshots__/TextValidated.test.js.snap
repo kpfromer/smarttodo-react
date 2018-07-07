@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextValidated renders a TextValidator 1`] = `
+<_default
+  name="exName"
+  onChange={[MockFunction]}
+  validate={Array []}
+  value="exValue"
+/>
+`;
+
+exports[`TextValidated validation provides TextValidated with validation based on validatedMethods 1`] = `
+Array [
+  Object {
+    "text": "length less than five!",
+    "validate": [MockFunction],
+  },
+]
+`;
