@@ -6,7 +6,9 @@ import TodoList from "./containers/TodoList/TodoList";
 import NotFound from "./components/NotFound/NotFound";
 import Login from "./components/Login/Login";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import GlobalSnackbar from "./containers/GlobalSnackbar/GlobalSnackbar";
 import Logout from "./components/Logout/Logout";
+import Register from "./components/Register/Register";
 
 import styles from './App.module.css'
 
@@ -24,6 +26,7 @@ class App extends Component {
             <Route component={NotFound}/>
           </Switch>
         </div>
+        <GlobalSnackbar />
       </BrowserRouter>
     );
   }

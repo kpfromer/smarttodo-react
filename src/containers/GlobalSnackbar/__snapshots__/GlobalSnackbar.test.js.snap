@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GlobalSnackbar Snackbar renders a snackbar 1`] = `
+Object {
+  "anchorOrigin": Object {
+    "horizontal": "center",
+    "vertical": "bottom",
+  },
+  "autoHideDuration": 5000,
+  "children": <WithStyles(SpecialSnackbar)
+    message="WORKING!"
+    onClose={[MockFunction]}
+    variant="success"
+  />,
+  "onClose": [MockFunction],
+  "open": true,
+}
+`;
+
+exports[`GlobalSnackbar SpecialSnackbar renders a SpecialSnackbar as content 1`] = `
+Object {
+  "message": "WORKING!",
+  "onClose": [MockFunction],
+  "variant": "success",
+}
+`;
