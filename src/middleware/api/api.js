@@ -1,7 +1,14 @@
 import CallApi from './CallApi';
 import { get } from 'lodash';
 
-export const API_ROOT = 'http://localhost:3001/v1';
+// TODO: TEST!
+let apiRoot = 'http://localhost:3001/v1';
+
+if (process.env.NODE_ENV === 'production') {
+  apiRoot = process.env.REACT_APP_API_ROOT;
+}
+export const API_ROOT = apiRoot;
+
 export const CALL_API = 'call/CALL_API';
 
 const CREATE_TYPES = [
