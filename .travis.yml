@@ -12,5 +12,4 @@ script:
 deploy:
   provider: surge
   project: ./build/
-  domain: smarttodo-test.surge.sh
   skip_cleanup: true
