@@ -26,19 +26,19 @@ describe("Header", () => {
     expect(wrapper.find(AppBar)).toMatchSnapshot();
   });
 
-  it('renders a logout link when the user is logged in', () => {
+  it('renders a #logged-in-links when the user is logged in', () => {
     const { wrapper } = setup({
       isAuthenticated: true
     });
 
-    expect(wrapper.find('#logout')).toMatchSnapshot();
+    expect(wrapper.find('#logged-in-links')).toMatchSnapshot();
   });
-  it('renders a login link when the user is not logged in', () => {
+  it('renders #logged-out-links when the user is not logged in', () => {
     const { wrapper } = setup({
       isAuthenticated: false
     });
 
-    expect(wrapper.find('#login')).toMatchSnapshot();
+    expect(wrapper.find('#logged-out-links')).toMatchSnapshot();
   });
 });
 

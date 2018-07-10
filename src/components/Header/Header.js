@@ -16,17 +16,26 @@ export const Header = ({ isAuthenticated }) => {
 
   const menuItems =
     isAuthenticated ?
-      <NavLink id="logout" to="/logout">
-        <Button color="inherit">
-          Logout
-        </Button>
-      </NavLink>
+      <div id="logged-in-links">
+        <NavLink to="/logout">
+          <Button color="inherit">
+            Logout
+          </Button>
+        </NavLink>
+      </div>
       :
-      <NavLink id="login" to="/login">
-        <Button color="inherit">
-          Login
-        </Button>
-      </NavLink>;
+      <div id="logged-out-links">
+        <NavLink to="/register">
+          <Button color="inherit">
+            Register
+          </Button>
+        </NavLink>
+        <NavLink to="/login">
+          <Button color="inherit">
+            Login
+          </Button>
+        </NavLink>
+      </div>;
 
   return (
     <AppBar position="static">

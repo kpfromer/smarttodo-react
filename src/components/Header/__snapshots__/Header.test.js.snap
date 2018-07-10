@@ -1,33 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Header renders a login link when the user is not logged in 1`] = `
-<NavLink
-  activeClassName="active"
-  aria-current="page"
-  id="login"
-  to="/login"
+exports[`Header renders #logged-out-links when the user is not logged in 1`] = `
+<div
+  id="logged-out-links"
 >
-  <WithStyles(Button)
-    color="inherit"
+  <NavLink
+    activeClassName="active"
+    aria-current="page"
+    to="/register"
   >
-    Login
-  </WithStyles(Button)>
-</NavLink>
+    <WithStyles(Button)
+      color="inherit"
+    >
+      Register
+    </WithStyles(Button)>
+  </NavLink>
+  <NavLink
+    activeClassName="active"
+    aria-current="page"
+    to="/login"
+  >
+    <WithStyles(Button)
+      color="inherit"
+    >
+      Login
+    </WithStyles(Button)>
+  </NavLink>
+</div>
 `;
 
-exports[`Header renders a logout link when the user is logged in 1`] = `
-<NavLink
-  activeClassName="active"
-  aria-current="page"
-  id="logout"
-  to="/logout"
+exports[`Header renders a #logged-in-links when the user is logged in 1`] = `
+<div
+  id="logged-in-links"
 >
-  <WithStyles(Button)
-    color="inherit"
+  <NavLink
+    activeClassName="active"
+    aria-current="page"
+    to="/logout"
   >
-    Logout
-  </WithStyles(Button)>
-</NavLink>
+    <WithStyles(Button)
+      color="inherit"
+    >
+      Logout
+    </WithStyles(Button)>
+  </NavLink>
+</div>
 `;
 
 exports[`Header renders a material design AppBar 1`] = `
@@ -55,18 +72,32 @@ exports[`Header renders a material design AppBar 1`] = `
         Smarttodo
       </NavLink>
     </WithStyles(Typography)>
-    <NavLink
-      activeClassName="active"
-      aria-current="page"
-      id="login"
-      to="/login"
+    <div
+      id="logged-out-links"
     >
-      <WithStyles(Button)
-        color="inherit"
+      <NavLink
+        activeClassName="active"
+        aria-current="page"
+        to="/register"
       >
-        Login
-      </WithStyles(Button)>
-    </NavLink>
+        <WithStyles(Button)
+          color="inherit"
+        >
+          Register
+        </WithStyles(Button)>
+      </NavLink>
+      <NavLink
+        activeClassName="active"
+        aria-current="page"
+        to="/login"
+      >
+        <WithStyles(Button)
+          color="inherit"
+        >
+          Login
+        </WithStyles(Button)>
+      </NavLink>
+    </div>
   </WithStyles(Toolbar)>
 </WithStyles(AppBar)>
 `;
