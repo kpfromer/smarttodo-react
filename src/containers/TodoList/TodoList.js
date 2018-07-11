@@ -5,9 +5,12 @@ import { connect } from 'react-redux';
 import * as TodoActionCreators from '../../actions/todo';
 import { fetchTodos } from '../../actions/todo';
 
+import CircularProgress from '@material-ui/core/CircularProgress';
 import List from '@material-ui/core/List';
 import Todo from "../../components/Todo/Todo";
 import NewTodo from "../../components/Todo/NewTodo";
+
+import styles from './TodoList.module.css';
 
 export class TodoList extends Component {
 
@@ -38,6 +41,14 @@ export class TodoList extends Component {
   removeTodo = (todo, index) => () => this.props.removeTodo(todo, index, todo.id);
 
   render() {
+    if (this.props.isLoading) {
+      return ( // TODO: make spinner last longer (~300ms) even if todos load in immediately
+        <div className={styles.loader}>
+          <CircularProgress />
+        </div>
+      )
+    }
+
     const { todos, addTodo } = this.props;
 
     const todoItems = todos.map((todo, index) =>
@@ -60,7 +71,8 @@ export class TodoList extends Component {
 }
 
 export const mapStateToProps = state => ({
-  todos: state.todos.todos
+  todos: state.todos.todos,
+  isLoading: state.todos.isFetching
 });
 
 const staticActions = {

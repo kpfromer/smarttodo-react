@@ -1,6 +1,7 @@
 import { mapStateToProps, TodoList } from "./TodoList";
 import { SetupComponent } from "react-component-setup";
 import List from '@material-ui/core/List';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Todo from "../../components/Todo/Todo";
 import NewTodo from "../../components/Todo/NewTodo";
 
@@ -24,7 +25,8 @@ const { shallow: setup } = SetupComponent({
     updateTodo: () => {},
     removeTodo: () => {},
     loadTodos: () => {},
-    todos
+    todos,
+    isLoading: false
   }
 });
 
@@ -38,6 +40,14 @@ describe('TodoList', () => {
     });
 
     expect(mockLoadTodos).toHaveBeenCalled();
+  });
+
+  it('renders a spinner while fetching todos', () => {
+    ({ wrapper } = setup({
+      isLoading: true
+    }));
+    expect(wrapper.find(CircularProgress)).toExist();
+    expect(wrapper.find(List)).not.toExist();
   });
 
   describe('given `todos`', () => {
@@ -140,6 +150,15 @@ describe('TodoList', () => {
 });
 
 describe('mapStateToProps', () => {
+  let valid;
+
+  beforeEach(() => {
+    valid = {
+      todos: [],
+      isFetching: false
+    }
+  });
+
   it('returns todos', () => {
     const mockTodos = [
       {
@@ -155,12 +174,25 @@ describe('mapStateToProps', () => {
     ];
     const mapped = mapStateToProps({
       todos: {
+        ...valid,
         todos: mockTodos
       }
     });
 
-    expect(mapped).toEqual({
+    expect(mapped).toMatchObject({
       todos: mockTodos
     });
+  });
+  it('returns isLoading', () => {
+    const isFetching = true;
+    const mapped = mapStateToProps({
+      todos: {
+        ...valid,
+        isFetching
+      }
+    });
+    expect(mapped).toMatchObject({
+      isLoading: isFetching
+    })
   });
 });
