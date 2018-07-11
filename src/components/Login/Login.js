@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
 import Card from '@material-ui/core/Card';
 import { tryLogin } from "../../actions/login";
 import { Redirect, withRouter } from "react-router-dom";
@@ -8,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import FormValidator from "../FormValidator/FormValidator";
 
 import styles from './Login.module.css';
@@ -17,6 +19,7 @@ import { changeSnackbar } from "../../actions/snackbar";
 export class Login extends PureComponent {
 
   static propTypes = {
+    isLoading: PropTypes.bool.isRequired,
     login: PropTypes.func.isRequired,
     changeSnackbar: PropTypes.func.isRequired
   };
@@ -76,10 +79,10 @@ export class Login extends PureComponent {
 
     return (
       <div className={styles.container}>
-        <Card className={styles.card}>
+        <Card className={classNames(styles.card, styles.loadingRelative)}>
           <FormValidator onSubmit={this.handleSubmit}>
             <CardContent>
-              <Typography variant="title">
+              <Typography className={styles.visibleOverLoader} variant="title">
                 Login
               </Typography>
               <TextValidated
@@ -114,9 +117,17 @@ export class Login extends PureComponent {
                   fullWidth: true
                 }}
               />
+              { // TODO: artificially increase load time to a minimum - UX For more natural feel
+                this.props.isLoading &&
+                <div className={styles.loadingOverlay}>
+                  <div className={styles.loader}>
+                    <CircularProgress />
+                  </div>
+                </div>
+              }
             </CardContent>
             <CardActions className={styles.cardActions}>
-              <Button type="submit" size="medium" color="primary">
+              <Button className={styles.visibleOverLoader} disabled={this.props.isLoading} type="submit" size="medium" color="primary">
                 Submit
               </Button>
             </CardActions>
@@ -127,7 +138,11 @@ export class Login extends PureComponent {
   }
 }
 
-export default connect(null, {
+export const mapStateToProps = state => ({
+  isLoading: state.login.isFetching
+});
+
+export default connect(mapStateToProps, {
   login: tryLogin,
   changeSnackbar
 })(withRouter(Login));

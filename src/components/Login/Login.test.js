@@ -1,10 +1,16 @@
 import { Login } from "./Login";
 import { SetupComponent } from "react-component-setup";
+import CircularProgress from '@material-ui/core/CircularProgress';
 import TextValidated from "../FormValidator/TextValidated";
 import FormValidator from "../FormValidator/FormValidator";
 
 const { shallow: setup } = SetupComponent({
-  component: Login
+  component: Login,
+  defaultProps: {
+    login: () => {},
+    changeSnackbar: () => {},
+    isLoading: false
+  }
 });
 
 describe('Login', () => {
@@ -19,6 +25,18 @@ describe('Login', () => {
       login: mockLogin,
       changeSnackbar: mockChangeSnackbar
     }));
+  });
+
+  describe('when `isLoading`', () => {
+    beforeEach(() => {
+      ({ wrapper } = setup({
+        isLoading: true
+      }))
+    });
+
+    it('renders a progress circle', () => {
+      expect(wrapper.find(CircularProgress)).toExist();
+    });
   });
 
   describe('user submits login form with username and password filled', () => {
