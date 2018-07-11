@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:prod": "npm run build && del './build/static/**/*.map' && mv ./build/index.html ./build/200.html",
+    "build:prod": "npm run build && del './build/static/**/*.map'",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
