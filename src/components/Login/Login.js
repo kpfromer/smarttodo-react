@@ -94,7 +94,7 @@ export class Login extends PureComponent {
                   margin: 'dense',
                   label: 'Username',
                   type: 'text',
-                  // autoComplete: 'username',
+                  autoComplete: 'username',
                   fullWidth: true
                 }}
               />
@@ -110,7 +110,7 @@ export class Login extends PureComponent {
                   margin: 'dense',
                   label: 'Password',
                   type: 'password',
-                  // autoComplete: 'current-password',
+                  autoComplete: 'current-password',
                   fullWidth: true
                 }}
               />
