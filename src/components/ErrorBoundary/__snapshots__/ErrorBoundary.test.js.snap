@@ -46,7 +46,19 @@ exports[`ErrorBoundary if child error renders error message and crash report but
 </div>
 `;
 
-exports[`ErrorBoundary if child error reports error to sentry.io on production 1`] = `[Error: An error!]`;
+exports[`ErrorBoundary if child error reports error to sentry.io on production 1`] = `
+Array [
+  [Error: An error!],
+  Object {
+    "extra": Object {
+      "componentStack": "
+    in ThrowErrorChild (at ErrorBoundary.test.js:53)
+    in ErrorBoundary (created by WrapperComponent)
+    in WrapperComponent",
+    },
+  },
+]
+`;
 
 exports[`ErrorBoundary no errors renders children 1`] = `
 <div>
