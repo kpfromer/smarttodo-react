@@ -9,9 +9,19 @@ import { applyMiddleware, createStore } from 'redux';
 import { Provider } from "react-redux";
 import Reducers from "./reducers/";
 
+import Raven from 'raven-js';
+
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import { logout } from "./actions/login";
+import { changeSnackbar } from "./actions/snackbar";
 import api from "./middleware/api/api";
+
+if (process.env.NODE_ENV === 'production') {
+  Raven
+    .config(process.env.REACT_APP_SENTRYIOTOKEN)
+    .install();
+}
 
 const store = createStore(
   Reducers,
