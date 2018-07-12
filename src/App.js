@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Header from "./components/Header/Header";
@@ -11,24 +11,27 @@ import Logout from "./components/Logout/Logout";
 import Register from "./components/Register/Register";
 
 import styles from './App.module.css'
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
-        <Fragment>
+        <ErrorBoundary>
           <div className={styles.container}>
             <Header/>
-            <Switch>
-              <PrivateRoute path="/todo" component={TodoList}/>
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login}/>
-              <Route exact path="/logout" component={Logout}/>
-              <Route component={NotFound}/>
-            </Switch>
+            <ErrorBoundary>
+              <Switch>
+                <PrivateRoute path="/todo" component={TodoList}/>
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login}/>
+                <Route exact path="/logout" component={Logout}/>
+                <Route component={NotFound}/>
+              </Switch>
+            </ErrorBoundary>
           </div>
           <GlobalSnackbar />
-        </Fragment>
+        </ErrorBoundary>
       </BrowserRouter>
     );
   }
