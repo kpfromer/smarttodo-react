@@ -45,12 +45,13 @@ export class Register extends Component {
         });
         this.setState({ redirect: true })
       })
-      .catch(response =>
+      .catch(response => {
         this.props.closeSnackbar({
           message: response.error,
           variant: 'error'
-        })
-      );
+        });
+        this.setState({ password: '' });
+      });
   };
 
   render() {
@@ -87,7 +88,6 @@ export class Register extends Component {
                 value={this.state.password}
                 onChange={this.updateValue('password')}
                 textFieldProps={{
-                  autoFocus: true,
                   margin: 'dense',
                   label: 'Password',
                   type: 'password',
@@ -101,7 +101,6 @@ export class Register extends Component {
                 value={this.state.email}
                 onChange={this.updateValue('email')}
                 textFieldProps={{
-                  autoFocus: true,
                   margin: 'dense',
                   label: 'Email',
                   type: 'email',
@@ -115,7 +114,6 @@ export class Register extends Component {
                 value={this.state.firstName}
                 onChange={this.updateValue('firstName')}
                 textFieldProps={{
-                  autoFocus: true,
                   margin: 'dense',
                   label: 'First Name',
                   type: 'text',
@@ -129,7 +127,6 @@ export class Register extends Component {
                 value={this.state.lastName}
                 onChange={this.updateValue('lastName')}
                 textFieldProps={{
-                  autoFocus: true,
                   margin: 'dense',
                   label: 'Last Name',
                   type: 'text',
