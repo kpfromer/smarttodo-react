@@ -5,6 +5,11 @@ exports[`Todo on ListItemText click renders the DescriptionForm for editing 1`] 
   clearOnUpdate={false}
   description="what todo?"
   onUpdate={[Function]}
+  textFieldProps={
+    Object {
+      "autoFocus": true,
+    }
+  }
 />
 `;
 

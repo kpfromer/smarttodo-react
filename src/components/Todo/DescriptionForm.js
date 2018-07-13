@@ -8,11 +8,13 @@ export default class DescriptionForm extends Component {
   static propTypes = {
     onUpdate: PropTypes.func.isRequired,
     description: PropTypes.string,
+    textFieldProps: PropTypes.object,
     clearOnUpdate: PropTypes.bool
   };
 
   static defaultProps = {
     description: '',
+    textFieldProps: {},
     clearOnUpdate: false
   };
 
@@ -47,6 +49,7 @@ export default class DescriptionForm extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <TextField
+          {...this.props.textFieldProps}
           value={description}
           error={invalid}
           onChange={this.updateDescription}

@@ -55,7 +55,7 @@ export default class Todo extends Component {
       </Fragment>
       :
       <ListItemText>
-        <DescriptionForm description={description} onUpdate={this.handleUpdate}/>
+        <DescriptionForm textFieldProps={{ autoFocus: true }} description={description} onUpdate={this.handleUpdate}/>
       </ListItemText>;
 
     return (

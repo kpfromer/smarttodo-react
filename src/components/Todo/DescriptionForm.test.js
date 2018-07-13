@@ -24,6 +24,18 @@ describe('DescriptionForm', () => {
     expect(input).toHaveProp('value', 'default description')
   });
 
+  it('renders Textfield with `textFieldProps`', () => {
+    const { input } = setup({
+      textFieldProps: {
+        autoFocus: true,
+        otherValue: 'different'
+      }
+    });
+
+    expect(input).toHaveProp('autoFocus', true);
+    expect(input).toHaveProp('otherValue', 'different');
+  });
+
   it('display valid input', () => {
     const { input } = setup();
 
