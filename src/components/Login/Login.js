@@ -109,7 +109,6 @@ export class Login extends PureComponent {
                 value={this.state.password}
                 onChange={this.updateValue('password')}
                 textFieldProps={{
-                  autoFocus: true,
                   margin: 'dense',
                   label: 'Password',
                   type: 'password',
