@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`serverLogout changes snackbar message 1`] = `
+Object {
+  "message": "Redirecting to login. You were logged out.",
+  "variant": "info",
+}
+`;
