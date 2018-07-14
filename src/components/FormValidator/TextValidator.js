@@ -93,7 +93,7 @@ export class TextValidator extends Component {
 
   componentDidUpdate(prevProps) {
     const { value: oldValue, name: oldName } = prevProps;
-    const { value: newValue, name: newName, removeInput, initializeInput } = this.props;
+    const { value: newValue, name: newName, value, removeInput, initializeInput } = this.props;
 
     if (oldValue !== newValue) {
       this.validateValue(newValue);
@@ -101,7 +101,7 @@ export class TextValidator extends Component {
 
     if (oldName !== newName) {
       removeInput(oldName);
-      initializeInput(newName);
+      initializeInput(newName, value, this.validateValue);
     }
   }
 
