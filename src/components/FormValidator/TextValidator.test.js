@@ -1,6 +1,6 @@
 import React from "react";
 import { TextValidator } from "./TextValidator";
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import { SetupComponent } from "react-component-setup";
 import TextField from '@material-ui/core/TextField';
 
@@ -47,6 +47,24 @@ describe('TextValidator', () => {
 
     it('renders a TextField with value and other properties', () => {
       expect(wrapper).toMatchSnapshot();
+    });
+
+    describe('given `validateOnBlur`', () => {
+      let blurValue;
+
+      beforeEach(() => {
+        blurValue = 'blur value';
+        wrapper = shallow(
+          <TextValidator validateOnBlur value={blurValue} onChange={() => {}} validate={mockValidate}/>
+        )
+      });
+
+      it('validates TextValid value when user clicks away', () => {
+        mockValidate.mockReturnValue(false);
+        wrapper.find(TextField).simulate('focus');
+        wrapper.find(TextField).simulate('blur', { target: { value: blurValue } });
+        expect(mockValidate).toHaveBeenCalledWith(blurValue);
+      });
     });
 
     describe('user enters text', () => {

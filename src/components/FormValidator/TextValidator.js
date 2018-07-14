@@ -21,11 +21,16 @@ export class TextValidator extends Component {
       PropTypes.arrayOf(validateShape),
       validateShape
     ]).isRequired,
+    validateOnBlur: PropTypes.bool,
     textFieldProps: PropTypes.object,
     name: PropTypes.string,
     updateFormInput: PropTypes.func,
     initializeInput: PropTypes.func,
     removeInput: PropTypes.func,
+  };
+
+  static defaultProps = {
+    validateOnBlur: false
   };
 
   state = {
@@ -105,12 +110,19 @@ export class TextValidator extends Component {
     this.props.onChange({ value, error });
   };
 
+  handleBlur = event => {
+    if (this.props.validateOnBlur) {
+      this.validateValue(event.target.value);
+    }
+  };
+
   render() {
     const { value, textFieldProps } = this.props;
     const { error, errorText } = this.state;
     return (
       <TextField
         {...textFieldProps}
+        onBlur={this.handleBlur}
         value={value}
         error={error}
         onChange={this.handleChange}
