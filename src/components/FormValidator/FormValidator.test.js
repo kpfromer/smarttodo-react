@@ -9,12 +9,12 @@ class MockValidateInput extends Component {
   }
 }
 
-const MockValidatorContextConsumer = ({ name }) =>
+const MockValidatorContextConsumer = ({...testParams}) =>
   <ValidatorContext.Consumer>
     {
       ({ initializeInput, removeInput, updateFormInput }) =>
         <MockValidateInput
-          name={name}
+          {...testParams}
           initializeInput={initializeInput}
           removeInput={removeInput}
           updateFormInput={updateFormInput}
@@ -99,4 +99,35 @@ describe('FormValidator', () => {
     expect(mockHandleError).toHaveBeenCalled();
   });
   // TODO: test for removeInput
+  describe('given `validateOnSubmit`', () => {
+    let triggerInputValidationOne, triggerInputValidationTwo;
+    beforeEach(() => {
+      triggerInputValidationOne = jest.fn();
+      triggerInputValidationTwo = jest.fn();
+
+      wrapper = mount(
+        <FormValidator validateOnSubmit onSubmit={mockHandleSubmit} onError={mockHandleError}>
+          <div>
+            <div>
+              <MockValidatorContextConsumer name="input1" value="inputValue1" triggerValidation={triggerInputValidationOne} />
+            </div>
+            <div>
+              <MockValidatorContextConsumer name="input2" value="inputValue2" triggerValidation={triggerInputValidationTwo} />
+            </div>
+          </div>
+        </FormValidator>
+      );
+
+      wrapper.find(MockValidateInput).forEach(component => {
+        const { name, value, triggerValidation, initializeInput } = component.props();
+        initializeInput(name, value, triggerValidation);
+      });
+    });
+
+    it('triggers input\'s validation on submit', () => {
+      wrapper.find(FormValidator).simulate('submit', { preventDefault: () => {} });
+      expect(triggerInputValidationOne).toHaveBeenCalledWith('inputValue1');
+      expect(triggerInputValidationTwo).toHaveBeenCalledWith('inputValue2');
+    });
+  });
 });

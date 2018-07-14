@@ -10,20 +10,23 @@ export default class FormValidator extends Component {
 
   static propTypes = {
     onSubmit: PropTypes.func.isRequired,
+    validateOnSubmit: PropTypes.bool,
     onError: PropTypes.func
   };
 
   static defaultProps = {
+    validateOnSubmit: false,
     onError: () => {
     }
   };
 
-  updateFormInput = ({ name, error }) => {
+  updateFormInput = ({ name, value, error }) => {
     this.setState(prevState => ( {
       initializedInputs: prevState.initializedInputs.map(input => {
         if (input.name === name) {
           return {
             ...input,
+            value,
             edited: true
           };
         }
@@ -45,9 +48,9 @@ export default class FormValidator extends Component {
     }
   };
 
-  initializeInput = name =>
+  initializeInput = (name, value, triggerValidation) =>
     this.setState(prevState => ( {
-      initializedInputs: [...prevState.initializedInputs, { name, edited: false }]
+      initializedInputs: [...prevState.initializedInputs, { name, value, triggerValidation, edited: false }]
     } ));
 
   removeInput = name =>
@@ -70,6 +73,10 @@ export default class FormValidator extends Component {
     event.preventDefault();
 
     const { errors, initializedInputs } = this.state;
+
+    if (this.props.validateOnSubmit) {
+      initializedInputs.forEach(input => input.triggerValidation(input.value));
+    }
 
     if (errors.length === 0 && initializedInputs.every(input => input.edited)) {
       this.props.onSubmit();
