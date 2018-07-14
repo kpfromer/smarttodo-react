@@ -7,6 +7,7 @@
     "@material-ui/icons": "^1.1.0",
     "axios": "^0.18.0",
     "classnames": "latest",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.10",
     "prop-types": "^15.6.2",
     "raven-js": "^3.26.3",
@@ -17,6 +18,7 @@
     "react-scripts": "^2.0.0-next.3e165448",
     "redux": "^4.0.0",
     "redux-thunk": "^2.3.0",
+    "rxjs": "^6.2.1",
     "uuid": "^3.2.1",
     "validator": "^10.4.0"
   },
