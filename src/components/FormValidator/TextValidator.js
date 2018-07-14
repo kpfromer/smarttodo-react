@@ -68,6 +68,7 @@ export class TextValidator extends Component {
     if (updateFormInput) {
       updateFormInput({
         name,
+        value,
         error
       });
     }
@@ -77,9 +78,9 @@ export class TextValidator extends Component {
   };
 
   componentDidMount() {
-    const { initializeInput, name } = this.props;
+    const { initializeInput, name, value } = this.props;
     if (initializeInput) {
-      initializeInput(name);
+      initializeInput(name, value, this.validateValue);
     }
   }
 

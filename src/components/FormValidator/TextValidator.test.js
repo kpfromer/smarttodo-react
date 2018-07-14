@@ -155,16 +155,17 @@ describe('TextValidator', () => {
   });
 
   describe('with context', () => {
-    let name, mockUpdateFormInput, mockInitializeInput, mockRemoveInput, mockValidate;
+    let name, value, Component, mockUpdateFormInput, mockInitializeInput, mockRemoveInput, mockValidate;
     beforeEach(() => {
       name = 'usernameInput';
+      value = 'initial';
 
       mockUpdateFormInput = jest.fn();
       mockInitializeInput = jest.fn();
       mockRemoveInput = jest.fn();
       mockValidate = jest.fn();
 
-      const Component = getComponentWithContext({
+      Component = getComponentWithContext({
         updateFormInput: mockUpdateFormInput,
         initializeInput: mockInitializeInput,
         removeInput: mockRemoveInput
@@ -173,7 +174,7 @@ describe('TextValidator', () => {
       wrapper = mount(
         <Component
           name={name}
-          value="initial"
+          value={value}
           onChange={() => {
           }}
           validate={mockValidate}
@@ -182,7 +183,8 @@ describe('TextValidator', () => {
     });
     // TODO: rename properties
     it('initializes input on creation', () => {
-      expect(mockInitializeInput).toHaveBeenCalledWith(name);
+      expect(mockInitializeInput.mock.calls[0].slice(0, 2)).toEqual([name, value]);
+      expect(mockInitializeInput.mock.calls[0][2]).toBe(wrapper.find('TextValidator').instance().validateValue);
     });
     it('deinitializes and reinitializes if name changes', () => {
       const differentName = 'adifferentname';
@@ -192,15 +194,17 @@ describe('TextValidator', () => {
       expect(mockRemoveInput).toHaveBeenCalledWith(name);
       expect(mockInitializeInput).toHaveBeenCalledWith(differentName);
     });
-    it('updates form input error on TextField value change', () => {
+    it('updates form input error and value on TextField value change', () => {
       const invalid = true;
+      const value = 'new invalid value';
 
       mockValidate.mockReturnValue(!invalid);
-      wrapper.find('TextField').props().onChange({ target: { value: 'new invalid value' } });
+      wrapper.find('TextField').props().onChange({ target: { value } });
       wrapper.update();
 
       expect(mockUpdateFormInput).toHaveBeenCalledWith({
         name,
+        value,
         error: invalid
       })
     });
