@@ -11,7 +11,7 @@ export default class TextValidated extends Component {
     value: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     name: PropTypes.string,
-    textFieldProps: PropTypes.object,
+    textValidatorProps: PropTypes.object,
     required: PropTypes.bool,
     minLength: PropTypes.number,
     maxLength: PropTypes.number,
@@ -33,7 +33,7 @@ export default class TextValidated extends Component {
   };
 
   render() {
-    const { name, value, onChange, hintName, textFieldProps, ...validationTypes } = this.props;
+    const { name, value, onChange, hintName, textValidatorProps, ...validationTypes } = this.props;
     const validate = Object.keys(validationTypes)
       .filter(validationName => this.props[validationName] !== null)
       .map(validationName => {
@@ -52,10 +52,10 @@ export default class TextValidated extends Component {
 
     return (
       <TextValidator
+        {...textValidatorProps}
         name={name}
         value={value}
         onChange={onChange}
-        textFieldProps={textFieldProps}
         validate={validate}
       />
     );

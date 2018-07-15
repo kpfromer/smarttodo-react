@@ -53,4 +53,20 @@ describe('TextValidated', () => {
       expect(mockHint).toHaveBeenCalledWith('exHintName');
     });
   });
+
+  describe('given `textValidatorProps`', () => {
+    it('passes the values to the TextValidator', () => {
+      const values = {
+        margin: 'different',
+        textFieldProps: {
+          width: 'a value'
+        }
+      };
+      const { wrapper } = setup({
+        textValidatorProps: values
+      });
+
+      expect(wrapper.find(TextValidator).props()).toMatchObject(values);
+    });
+  });
 });
