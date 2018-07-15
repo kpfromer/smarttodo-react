@@ -80,7 +80,7 @@ export class Login extends PureComponent {
     return (
       <div className={styles.container}>
         <Card className={classNames(styles.card, styles.loadingRelative)}>
-          <FormValidator onSubmit={this.handleSubmit}>
+          <FormValidator validateOnSubmit onSubmit={this.handleSubmit}>
             <CardContent>
               <Typography className={styles.visibleOverLoader} variant="title">
                 Login
@@ -90,33 +90,39 @@ export class Login extends PureComponent {
                 hintName="Username"
                 required
                 minLength={3}
+                textValidatorProps={{
+                  validateOnBlur: true,
+                  textFieldProps: {
+                    autoFocus: true,
+                    margin: 'dense',
+                    label: 'Username',
+                    type: 'text',
+                    autoComplete: 'username',
+                    fullWidth: true
+                  }
+                }}
                 value={this.state.username}
                 onChange={this.updateValue('username')}
-                textFieldProps={{
-                  autoFocus: true,
-                  margin: 'dense',
-                  label: 'Username',
-                  type: 'text',
-                  autoComplete: 'username',
-                  fullWidth: true
-                }}
               />
               <TextValidated
                 name="password"
                 hintName="Password"
                 required
                 minLength={3}
+                textValidatorProps={{
+                  validateOnBlur: true,
+                  textFieldProps: {
+                    margin: 'dense',
+                    label: 'Password',
+                    type: 'password',
+                    autoComplete: 'current-password',
+                    fullWidth: true
+                  }
+                }}
                 value={this.state.password}
                 onChange={this.updateValue('password')}
-                textFieldProps={{
-                  margin: 'dense',
-                  label: 'Password',
-                  type: 'password',
-                  autoComplete: 'current-password',
-                  fullWidth: true
-                }}
               />
-              { // TODO: artificially increase load time to a minimum - UX For more natural feel
+              { // TODO: artificially increase load time to a minimum - UX For more natural feel - Remove api promises and thunk for rxjs - rxjs will allow for delay on change
                 this.props.isLoading &&
                 <div className={styles.loadingOverlay}>
                   <div className={styles.loader}>
