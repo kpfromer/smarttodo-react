@@ -37,6 +37,10 @@ export default class TextValidated extends Component {
     const validate = Object.keys(validationTypes)
       .filter(validationName => this.props[validationName] !== null)
       .map(validationName => {
+        if (!Object.keys(this.validatedMethods).includes(validationName)) {
+          throw new Error(`Invalid property of TextValidated: ${validationName}`);
+        }
+
         const validateValue = this.props[validationName];
 
         if (!validateValue) {
