@@ -73,12 +73,15 @@ export class Register extends Component {
                 required
                 value={this.state.username}
                 onChange={this.updateValue('username')}
-                textFieldProps={{
-                  autoFocus: true,
-                  margin: 'dense',
-                  label: 'Username',
-                  type: 'text',
-                  fullWidth: true
+                textValidatorProps={{
+                  validateOnBlur: true,
+                  textFieldProps: {
+                    autoFocus: true,
+                    margin: 'dense',
+                    label: 'Username',
+                    type: 'text',
+                    fullWidth: true // TODO: ADD AUTOCOMPLETE VALUES
+                  }
                 }}
               />
               <TextValidated
@@ -87,11 +90,14 @@ export class Register extends Component {
                 required
                 value={this.state.password}
                 onChange={this.updateValue('password')}
-                textFieldProps={{
-                  margin: 'dense',
-                  label: 'Password',
-                  type: 'password',
-                  fullWidth: true
+                textValidatorProps={{
+                  validateOnBlur: true,
+                  textFieldProps: {
+                    margin: 'dense',
+                    label: 'Password',
+                    type: 'password',
+                    fullWidth: true
+                  }
                 }}
               />
               <TextValidated
@@ -100,11 +106,14 @@ export class Register extends Component {
                 email
                 value={this.state.email}
                 onChange={this.updateValue('email')}
-                textFieldProps={{
-                  margin: 'dense',
-                  label: 'Email',
-                  type: 'email',
-                  fullWidth: true
+                textValidatorProps={{
+                  validateOnBlur: true,
+                  textFieldProps: {
+                    margin: 'dense',
+                    label: 'Email',
+                    type: 'email',
+                    fullWidth: true
+                  }
                 }}
               />
               <TextValidated
@@ -113,11 +122,14 @@ export class Register extends Component {
                 required
                 value={this.state.firstName}
                 onChange={this.updateValue('firstName')}
-                textFieldProps={{
-                  margin: 'dense',
-                  label: 'First Name',
-                  type: 'text',
-                  fullWidth: true
+                textValidatorProps={{
+                  validateOnBlur: true,
+                  textFieldProps: {
+                    margin: 'dense',
+                    label: 'First Name',
+                    type: 'text',
+                    fullWidth: true
+                  }
                 }}
               />
               <TextValidated
@@ -126,11 +138,14 @@ export class Register extends Component {
                 required
                 value={this.state.lastName}
                 onChange={this.updateValue('lastName')}
-                textFieldProps={{
-                  margin: 'dense',
-                  label: 'Last Name',
-                  type: 'text',
-                  fullWidth: true
+                textValidatorProps={{
+                  validateOnBlur: true,
+                  textFieldProps: {
+                    margin: 'dense',
+                    label: 'Last Name',
+                    type: 'text',
+                    fullWidth: true
+                  }
                 }}
               />
             </CardContent>
