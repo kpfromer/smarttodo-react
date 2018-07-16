@@ -72,4 +72,29 @@ describe('login reducer', () => {
       expect(result).toMatchSnapshot();
     });
   });
+
+  describe('RECEIVE_LOGIN', () => {
+    it('closes spinner', () => {
+      const result = LoginReducer({ isFetching: true }, {
+        type: LoginActionTypes.RECEIVE_LOGIN
+      });
+
+      expect(result).toMatchObject({
+        isFetching: false
+      });
+    });
+  });
+
+  describe('FAILURE_LOGIN', () => {
+    it('closes spinner', () => {
+      const result = LoginReducer({ isFetching: true }, {
+        type: LoginActionTypes.FAILURE_LOGIN
+      });
+
+      expect(result).toMatchObject({
+        isFetching: false
+      });
+
+    });
+  });
 });

@@ -31,6 +31,11 @@ function login
         didInvalidate: false,
         token: action.response
       };
+    case LoginActionTypes.FAILURE_LOGIN:
+      return {
+        ...state,
+        isFetching: false
+      };
     default:
       return state;
   }
