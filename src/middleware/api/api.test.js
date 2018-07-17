@@ -134,7 +134,9 @@ describe('api middleware', () => {
         ...valid,
         authenticate: false
       }
-    })).rejects.toMatchSnapshot();
+    })).rejects.toMatchObject({
+      error: 'Something went wrong!',
+    });
   });
 
   describe('dispatch', () => {
