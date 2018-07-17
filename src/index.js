@@ -13,7 +13,9 @@ import Raven from 'raven-js';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import { serverLogout } from "./actions/server-logout";
 import api from "./middleware/api/api";
+import httpError from './middleware/http-error/http-error';
 
 if (process.env.NODE_ENV === 'production') {
   Raven
@@ -27,7 +29,13 @@ const store = createStore(
   applyMiddleware(
     api({
       getAuthFromState: state => state.login.token
-    })
+    }),
+    httpError([
+      {
+        statusCode: 401,
+        action: serverLogout
+      }
+    ])
   )
 );
 
