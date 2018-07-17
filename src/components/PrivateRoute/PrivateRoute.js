@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 export class PrivateRoute extends PureComponent {
 
   render() {
-    // TODO: handle render
     const { component: Component, isAuthenticated, ...rest } = this.props;
     return (
       <Route {...rest} render={(props) => (
