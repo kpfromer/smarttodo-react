@@ -1,5 +1,6 @@
 import * as callApi from './CallApi';
 import apiDefault, { CALL_API } from "./api";
+import { HTTP_ERROR } from "../http-error/http-error";
 
 
 describe('api middleware', () => {
@@ -206,10 +207,33 @@ describe('api middleware', () => {
           authenticate: false
         }
       }).catch(() => {
-        expect(mockDispatch.mock.calls[1][0]).toEqual({
+        expect(mockDispatch.mock.calls[1][0]).toMatchObject({
           type: 'FAILURE',
           ...actionData,
           error: message
+        });
+      });
+    });
+    it('passes error statusCode to HttpError middleware', () => {
+      expect.assertions(1);
+
+      callApi.default.mockImplementation(() => Promise.reject({
+        response: {
+          status: 401
+        }
+      }));
+
+      return middleware(jest.fn(), mockDispatch, {
+        ...actionData,
+        [CALL_API]: {
+          ...valid,
+          authenticate: false
+        }
+      }).catch(() => {
+        expect(mockDispatch.mock.calls[1][0]).toMatchObject({
+          [HTTP_ERROR]: {
+            statusCode: 401
+          }
         });
       });
     });

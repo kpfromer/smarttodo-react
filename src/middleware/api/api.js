@@ -1,5 +1,6 @@
 import CallApi from './CallApi';
 import { get } from 'lodash';
+import { HTTP_ERROR } from "../http-error/http-error";
 
 // TODO: TEST!
 let apiRoot = 'http://localhost:3001/v1';
@@ -21,6 +22,7 @@ const VALID_TYPES = [
   'DELETE'
 ];
 
+// TODO: UPDATE FOR RXJS https://redux-observable.js.org/docs/basics/Epics.html
 export default ({ getAuthFromState } = { getAuthFromState: val => val }) => store => next => action => {
   const callAPI = action[CALL_API];
 
@@ -81,7 +83,12 @@ export default ({ getAuthFromState } = { getAuthFromState: val => val }) => stor
         errorMessage = defaultMessage;
       }
 
+      const statusCode = get(error, 'response.status');
+
       return Promise.reject(next(actionWith({
+        [HTTP_ERROR]: {
+          statusCode
+        },
         type: failureType,
         error: errorMessage // todo fix with backend when constraints don't match!
       })))
