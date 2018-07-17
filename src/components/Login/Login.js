@@ -72,8 +72,6 @@ export class Login extends PureComponent {
 
   render() {
     if (this.state.redirectToReferrer) {
-      // TODO: add flash message to and from
-      // https://github.com/mjrussell/redux-auth-wrapper/issues/64
       return <Redirect to="/todo"/>;
     }
 
