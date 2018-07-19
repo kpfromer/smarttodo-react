@@ -32,6 +32,7 @@ Object {
   "endpoint": "/todo",
   "mapResponse": [Function],
   "method": "GET",
+  "minimumDelay": 1000,
   "types": Array [
     "todo/REQUEST_TODOS",
     "todo/RECIEVE_TODOS",

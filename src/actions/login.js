@@ -13,7 +13,8 @@ export const tryLogin = (username, password) => ({
     data: { username, password },
     authenticate: false,
     mapResponse: response => response.access_token
-  }
+  },
+  minimumDelay: 1000
 });
 
 export const logout = () => ({

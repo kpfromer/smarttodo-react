@@ -17,7 +17,8 @@ export const fetchTodos = () => ({
         ...todoWithDatabaseId,
         id: _id
       }
-    })
+    }),
+    minimumDelay: 1000
   }
 });
 
