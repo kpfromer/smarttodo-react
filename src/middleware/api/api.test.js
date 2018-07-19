@@ -1,7 +1,9 @@
 import * as callApi from './CallApi';
 import apiDefault, { CALL_API } from "./api";
 import { HTTP_ERROR } from "../http-error/http-error";
+import pMinDelay from 'p-min-delay';
 
+jest.mock('p-min-delay', () => jest.fn());
 
 describe('api middleware', () => {
   let middleware, valid;
@@ -81,6 +83,26 @@ describe('api middleware', () => {
     };
 
     expect(handler).toThrowErrorMatchingSnapshot();
+  });
+
+  it('waits for minimum delay to be reached', () => {
+    const mockResponsePromise = jest.fn();
+    const minimumDelay = 10240;
+
+    callApi.default.mockReturnValue(mockResponsePromise);
+    pMinDelay.mockReturnValue(Promise.resolve({
+      data: true
+    }));
+
+    middleware({}, jest.fn(), {
+      [CALL_API]: {
+        ...valid,
+        authenticate: false,
+        minimumDelay
+      }
+    });
+
+    expect(pMinDelay).toHaveBeenCalledWith(mockResponsePromise, minimumDelay, { delayRejection: false })
   });
 
   it('calls api with token if `authenticate`', () => {

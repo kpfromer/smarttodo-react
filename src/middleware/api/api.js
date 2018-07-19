@@ -1,6 +1,7 @@
 import CallApi from './CallApi';
 import { get } from 'lodash';
 import { HTTP_ERROR } from "../http-error/http-error";
+import pMinDelay from 'p-min-delay';
 
 // TODO: TEST!
 let apiRoot = 'http://localhost:3001/v1';
@@ -22,7 +23,6 @@ const VALID_TYPES = [
   'DELETE'
 ];
 
-// TODO: UPDATE FOR RXJS https://redux-observable.js.org/docs/basics/Epics.html
 export default ({ getAuthFromState } = { getAuthFromState: val => val }) => store => next => action => {
   const callAPI = action[CALL_API];
 
@@ -31,7 +31,7 @@ export default ({ getAuthFromState } = { getAuthFromState: val => val }) => stor
   }
 
   let { endpoint } = callAPI;
-  const { types, mapResponse, method, data, authenticate = true } = callAPI;
+  const { types, mapResponse, method, data, authenticate = true, minimumDelay = 0 } = callAPI;
 
   if (typeof endpoint === 'function') {
     endpoint = endpoint(store.getState())
@@ -70,8 +70,14 @@ export default ({ getAuthFromState } = { getAuthFromState: val => val }) => stor
   const [requestType, successType, failureType] = types;
   next(actionWith({ type: requestType }));
 
-  return CallApi(endpoint, method, mapResponse, data, token).then(
-    response => next(actionWith({
+  let apiCall = CallApi(endpoint, method, mapResponse, data, token);
+
+  if (minimumDelay) {
+    apiCall = pMinDelay(apiCall, minimumDelay, { delayRejection: false });
+  }
+
+  return apiCall
+    .then(response => next(actionWith({
       response,
       type: successType
     })),
