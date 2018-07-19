@@ -22,6 +22,10 @@ describe('api middleware', () => {
     }
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   // TODO: is returns rejected error and resolved response in dispatch(event).then()...
   it('errors if endpoint is not a string', () => {
     const handler = () => {
