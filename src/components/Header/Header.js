@@ -17,6 +17,11 @@ export const Header = ({ isAuthenticated }) => {
   const menuItems =
     isAuthenticated ?
       <div id="logged-in-links">
+        <NavLink to="/todo">
+          <Button color="inherit">
+            Todo
+          </Button>
+        </NavLink>
         <NavLink to="/logout">
           <Button color="inherit">
             Logout

@@ -36,6 +36,17 @@ exports[`Header renders a #logged-in-links when the user is logged in 1`] = `
   <NavLink
     activeClassName="active"
     aria-current="page"
+    to="/todo"
+  >
+    <WithStyles(Button)
+      color="inherit"
+    >
+      Todo
+    </WithStyles(Button)>
+  </NavLink>
+  <NavLink
+    activeClassName="active"
+    aria-current="page"
     to="/logout"
   >
     <WithStyles(Button)
