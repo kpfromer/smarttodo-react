@@ -3,12 +3,8 @@
 exports[`todo actions addTodo creates an api action to POST a todo 1`] = `
 Object {
   "data": Object {
-    "todos": Array [
-      Object {
-        "completed": true,
-        "description": "hello world",
-      },
-    ],
+    "completed": true,
+    "description": "hello world",
   },
   "endpoint": "/todo",
   "method": "POST",

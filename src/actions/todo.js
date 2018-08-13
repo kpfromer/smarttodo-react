@@ -22,27 +22,23 @@ export const fetchTodos = () => ({
   }
 });
 
-export const addTodo = (description, completed = false) => ({
-  tempId: uuid(),
-  todo: {
-    description,
-    completed
-  },
-  [CALL_API]: {
-    types: [
-      TodoActionTypes.ADD_TODO,
-      TodoActionTypes.ADD_TODO_SUCCESS,
-      TodoActionTypes.ADD_TODO_FAILURE
-    ],
-    method: 'POST',
-    endpoint: '/todo',
-    data: {
-      todos: [
-        { description, completed }
-      ]
+export const addTodo = (description, completed) => {
+  const todo = { description, completed };
+  return {
+    tempId: uuid(),
+    todo,
+    [CALL_API]: {
+      types: [
+        TodoActionTypes.ADD_TODO,
+        TodoActionTypes.ADD_TODO_SUCCESS,
+        TodoActionTypes.ADD_TODO_FAILURE
+      ],
+      method: 'POST',
+      endpoint: '/todo',
+      data: todo
     }
   }
-});
+};
 
 export const updateTodo = (prevTodo, newTodo, id) => {
 
