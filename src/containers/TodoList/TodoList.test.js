@@ -85,7 +85,7 @@ describe('TodoList', () => {
     });
 
     it('creates a new Todo', () => {
-      expect(mockAddTodo).toHaveBeenCalledWith('new description');
+      expect(mockAddTodo).toHaveBeenCalledWith('new description', false);
     });
   });
 
