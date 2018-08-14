@@ -36,6 +36,7 @@ export class TodoList extends Component {
       [propName]: value
     }, todo.id);
 
+  addTodo = description => this.props.addTodo(description, false);
   checkTodo = this.updateTodoByProp('completed');
   updateDescription = this.updateTodoByProp('description');
   removeTodo = (todo, index) => () => this.props.removeTodo(todo, index, todo.id);
@@ -64,7 +65,7 @@ export class TodoList extends Component {
     return (
       <List>
         {todoItems}
-        <NewTodo onCreate={addTodo} />
+        <NewTodo onCreate={this.addTodo}/>
       </List>
     );
   }
