@@ -50,7 +50,7 @@ export class TodoList extends Component {
       )
     }
 
-    const { todos, addTodo } = this.props;
+    const { todos } = this.props;
 
     const todoItems = todos.map((todo, index) =>
       <Todo
