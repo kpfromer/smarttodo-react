@@ -119,11 +119,9 @@ describe('todo reducer', () => {
         {
           type: TodoActionTypes.ADD_TODO_SUCCESS,
           tempId,
-          response: [
-            {
+          response: {
               _id: 'api-database-id!'
             }
-          ]
         }
       )).toMatchSnapshot();
     });

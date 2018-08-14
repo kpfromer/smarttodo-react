@@ -47,7 +47,7 @@ function todos(
           ...state.todos.slice(0, tempTodoIndex),
           {
             ...tempTodo,
-            id: action.response[0]._id
+            id: action.response._id
           },
           ...state.todos.slice(tempTodoIndex + 1)
         ]
