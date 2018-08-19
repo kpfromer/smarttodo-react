@@ -11,13 +11,6 @@ export const fetchTodos = () => ({
     ],
     method: 'GET',
     endpoint: '/todo',
-    mapResponse: todos => todos.map(todo => {
-      const { _id, ...todoWithDatabaseId } = todo;
-      return {
-        ...todoWithDatabaseId,
-        id: _id
-      }
-    }),
     minimumDelay: 1000
   }
 });
