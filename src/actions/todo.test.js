@@ -19,19 +19,6 @@ describe('todo actions', () => {
     it('creates an action to GET todos', () => {
       expect(action[CALL_API]).toMatchSnapshot();
     });
-    it('maps todos\' _id from api response to id', () => {
-      const todosFromApi = [
-        {
-          _id: 'a mongo id',
-          description: 'hello'
-        },
-        {
-          _id: 'gibberish',
-          description: 'world'
-        }
-      ];
-      expect(action[CALL_API].mapResponse(todosFromApi)).toMatchSnapshot();
-    });
   });
 
   describe('addTodo', () => {

@@ -26,7 +26,6 @@ Object {
 exports[`todo actions fetchTodos creates an action to GET todos 1`] = `
 Object {
   "endpoint": "/todo",
-  "mapResponse": [Function],
   "method": "GET",
   "minimumDelay": 1000,
   "types": Array [
@@ -35,19 +34,6 @@ Object {
     "todo/REQUEST_FAILURE_TODOS",
   ],
 }
-`;
-
-exports[`todo actions fetchTodos maps todos' _id from api response to id 1`] = `
-Array [
-  Object {
-    "description": "hello",
-    "id": "a mongo id",
-  },
-  Object {
-    "description": "world",
-    "id": "gibberish",
-  },
-]
 `;
 
 exports[`todo actions removeTodo can revert back to old todo at the same position 1`] = `
