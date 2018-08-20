@@ -18,9 +18,12 @@ import api from "./middleware/api/api";
 import httpError from './middleware/http-error/http-error';
 
 if (process.env.NODE_ENV === 'production') {
+  // Configure sentry io
   Raven
     .config(process.env.REACT_APP_SENTRYIOTOKEN)
     .install();
+  // Setup firebase config
+  require('./firebase');
 }
 
 const store = createStore(
