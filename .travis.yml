@@ -1,15 +1,16 @@
 language: node_js
 node_js:
-  - "10"
+- '10'
 cache:
   directories:
-    - node_modules
+  - node_modules
 install:
-  - npm install
+- npm install
 script:
-  - npm test
-  - npm run build:prod
+- npm test
+- npm run build:prod
 deploy:
   provider: firebase
-  token: $FIREBASE_TOKEN
+  token: 
+    secure: "P+w4qkzP+Qh9BLIIuiY6PgrERwoXNmEbWrxHr/5xHdOdwL2z9310Z7ZfMVGEk85UfC87kEqMyYXGMtOFzFW1rJioRTanLISMubsH8TO5zcNgODX4wcj9eoEuN1GA03qzLP09qo2nn2lsuPdNNLlP3RBOHRuZwEH+tz6LKPyiiyEgaX/P6+qDc6xC0e7phAfGCAUZ+ihhkKnM/uit6U18qagXZ2RBXzV07tPEoafwg04kWpSsww+WFzfCyn2h0TJ2RSYF13itL4JqZiI2X4qKoYSA54K9gxhyzHkTC8BRx9LG5K3tOgaCZ8dCR5Jkth7X41/4BkJgB661oEAO8Rj6aEyqhQLIjLX1wSJ6Tlihop/dMol0AmCKM5L14KSaOA76tZURnK7hc//4QQGxBUqmKAeiXdDZFrjFiKY7P/JgodqDwq7/Eoczs3ms7uxwfv0BF68N99jMgOXDLyYfexImSZQlRii+H90o6kHyixaaOIT+P+0T5aU9Zj8xN34rMSygKnlH/VTBE9Lkk1c67GokqMOLGvIME5RrbI/lhXJjZZu7KTTXHKT6kQJyYQYs12kCfXeTmLwlXV0efVFZU86Z3NL5He4uOiXfCdTURIpON/BM33zxWQY2EqDkOuBXgcK8JzNIJwOuZyrjS2Tpo0Nq3qguEP5zLsVCU8YTiO3tkUU="
   skip_cleanup: true
