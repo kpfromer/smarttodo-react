@@ -1,4 +1,4 @@
-import firebase from 'firebase'
+import firebase from 'firebase';
 const config = {
   apiKey: "AIzaSyAp9F0XYi5YS6Oue515LGoMXD-QsMcQA6k",
   authDomain: "smarttodo-react.firebaseapp.com",

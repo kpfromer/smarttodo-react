@@ -23,7 +23,7 @@ if (process.env.NODE_ENV === 'production') {
     .config(process.env.REACT_APP_SENTRYIOTOKEN)
     .install();
   // Setup firebase config
-  require('./firebase');
+  require('./firebase.js');
 }
 
 const store = createStore(
