@@ -10,10 +10,6 @@ script:
   - npm test
   - npm run build:prod
 deploy:
-  provider: s3
-  access_key_id: $AWSACCESSKEY
-  secret_access_key: $AWSACCESSSECRET
-  bucket: "smarttodo-react"
-  region: "us-west-1"
+  provider: firebase
+  token: $FIREBASE_TOKEN
   skip_cleanup: true
-  local_dir: build
