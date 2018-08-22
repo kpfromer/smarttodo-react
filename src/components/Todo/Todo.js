@@ -13,6 +13,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 export default class Todo extends Component {
 
+export class Todo extends Component {
+
   static propTypes = {
     description: PropTypes.string.isRequired,
     completed: PropTypes.bool.isRequired,
