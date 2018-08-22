@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FindLinks returns an array of custom links with text 1`] = `
+<React.Fragment>
+  <h1
+    key="google"
+  >
+    google
+  </h1>
+   hello world I need to check out 
+  <h1
+    key="example"
+  >
+    example
+  </h1>
+</React.Fragment>
+`;

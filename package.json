@@ -9,6 +9,7 @@
     "classnames": "latest",
     "firebase": "^5.4.0",
     "jwt-decode": "^2.2.0",
+    "linkify-it": "^2.0.3",
     "lodash": "^4.17.10",
     "p-min-delay": "^2.0.0",
     "prop-types": "^15.6.2",
@@ -23,6 +24,7 @@
     "redux-thunk": "^2.3.0",
     "rxjs": "^6.2.2",
     "rxjs-compat": "^6.2.2",
+    "tlds": "^1.203.1",
     "uuid": "^3.2.1",
     "validator": "^10.4.0"
   },
