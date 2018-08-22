@@ -1,5 +1,5 @@
 import { SetupComponent } from "react-component-setup";
-import Todo from "./Todo";
+import { Todo } from "./Todo";
 import DescriptionForm from "./DescriptionForm";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
