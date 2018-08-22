@@ -13,7 +13,14 @@ const { shallow: setup } = SetupComponent({
     completed: true,
     onCheck: () => {},
     onRemove: () => {},
-    onUpdate: () => {}
+    onUpdate: () => {},
+    theme: {
+      palette: {
+        secondary: {
+          main: '#94f'
+        }
+      }
+    }
   }
 });
 

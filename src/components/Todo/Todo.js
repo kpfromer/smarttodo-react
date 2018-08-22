@@ -34,6 +34,21 @@ export default class Todo extends Component {
     this.props.onUpdate(description);
   };
 
+  stopPropagation = event =>
+    event.stopPropagation();
+
+  handleDescriptionLink = ({ raw, url }) => (
+      <a
+        key={raw}
+        style={{ color: this.props.theme.palette.secondary.main }}
+        target="_blank"
+        onClick={this.stopPropagation}
+        href={url}
+      >
+        {raw}
+      </a>
+    );
+
   render() {
     const { description, completed } = this.props;
 
@@ -45,7 +60,11 @@ export default class Todo extends Component {
           tabIndex={1}
         />
         <ListItemText onClick={this.startEditing}>
+          <FindLinks
+            handleLink={this.handleDescriptionLink}
+          >
           {description}
+          </FindLinks>
         </ListItemText>
         <ListItemSecondaryAction>
           <IconButton onClick={this.removeTodo} aria-label="Delete">
@@ -64,4 +83,19 @@ export default class Todo extends Component {
       </ListItem>
     );
   }
+}     :
+      <ListItemText>
+        <DescriptionForm textFieldProps={{ autoFocus: true }} description={description} onUpdate={this.handleUpdate}/>
+      </ListItemText>;
+
+    return (
+      <div ref={providedDrag.innerRef} {...providedDrag.draggableProps}>
+        <ListItem divider>
+          {body}
+        </ListItem>
+      </div>
+    );
+  }
 }
+
+export default withTheme()(Todo);
