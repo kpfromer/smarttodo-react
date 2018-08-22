@@ -11,8 +11,6 @@ import IconButton from '@material-ui/core/IconButton';
 import { withTheme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-export default class Todo extends Component {
-
 export class Todo extends Component {
 
   static propTypes = {
