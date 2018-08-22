@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from 'prop-types';
 
+import FindLinks from '../FindLinks/FindLinks';
 import DescriptionForm from "./DescriptionForm";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
+import { withTheme } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
 export default class Todo extends Component {
@@ -74,26 +76,13 @@ export default class Todo extends Component {
       </Fragment>
       :
       <ListItemText>
-        <DescriptionForm textFieldProps={{ autoFocus: true }} description={description} onUpdate={this.handleUpdate}/>
+        <DescriptionForm textFieldProps={{ autoFocus: true }} description={description} onUpdate={this.handleUpdate} />
       </ListItemText>;
 
     return (
-      <ListItem divider>
-        {body}
-      </ListItem>
-    );
-  }
-}     :
-      <ListItemText>
-        <DescriptionForm textFieldProps={{ autoFocus: true }} description={description} onUpdate={this.handleUpdate}/>
-      </ListItemText>;
-
-    return (
-      <div ref={providedDrag.innerRef} {...providedDrag.draggableProps}>
         <ListItem divider>
           {body}
         </ListItem>
-      </div>
     );
   }
 }
