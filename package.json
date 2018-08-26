@@ -15,6 +15,7 @@
     "prop-types": "^15.6.2",
     "raven-js": "^3.26.3",
     "react": "^16.4.1",
+    "react-beautiful-dnd": "^8.0.5",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
@@ -22,8 +23,6 @@
     "redux": "^4.0.0",
     "redux-observable": "^1.0.0",
     "redux-thunk": "^2.3.0",
-    "rxjs": "^6.2.2",
-    "rxjs-compat": "^6.2.2",
     "tlds": "^1.203.1",
     "uuid": "^3.2.1",
     "validator": "^10.4.0"
