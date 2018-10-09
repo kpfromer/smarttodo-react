@@ -2,7 +2,7 @@
 
 exports[`TodoList given \`todos\` renders a list of Todos 1`] = `
 Array [
-  <Todo
+  <WithTheme(Todo)
     completed={false}
     description="math quiz"
     key="10"
@@ -10,7 +10,7 @@ Array [
     onRemove={[Function]}
     onUpdate={[Function]}
   />,
-  <Todo
+  <WithTheme(Todo)
     completed={true}
     description="computer science test"
     key="11"

@@ -29,7 +29,7 @@ exports[`Todo renders a checkbox and displays \`description\` label 1`] = `
       <FindLinks
         handleLink={[Function]}
       >
-      what todo?
+        what todo?
       </FindLinks>
     </WithStyles(ListItemText)>
     <WithStyles(ListItemSecondaryAction)>
