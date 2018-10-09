@@ -51,7 +51,8 @@
       "!src/setupTests.js",
       "!src/registerServiceWorker.js",
       "!/node_modules/"
-    ]
+    ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "browserslist": {
     "development": [
