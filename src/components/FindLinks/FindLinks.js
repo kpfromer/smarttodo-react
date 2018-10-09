@@ -10,12 +10,11 @@ export default class FindLinks extends Component {
     handleLink: PropTypes.func.isRequired
   };
 
-  linkify;
-  
-  componentWillMount() {
-    const link = Linkify();
-    link.tlds(tlds);
-    this.linkify = link;
+  constructor(props) {
+    super(props);
+    const links = Linkify();
+    links.tlds(tlds)
+    this.linkify = links;
   }
 
   errorIfChildrenAreNotPlainText = () => {
