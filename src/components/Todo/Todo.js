@@ -44,6 +44,7 @@ export class Todo extends Component {
         key={raw}
         style={{ color: this.props.theme.palette.secondary.main }}
         target="_blank"
+        rel="noopener noreferrer"
         onClick={this.stopPropagation}
         href={url}
       >
