@@ -53,10 +53,13 @@ jobs:
       # Get the build folder
       - restore_cache:
           key: v1-build-{{ .Environment }}
+      - run:
+          name: Install surge
+          command: npm install --no-save surge
       # Deploy the build folder to surge
       - run: 
-          name: Deploy to Surge.sh
-          command: npm run deploy
+          name: Deploy Build to Surge.sh
+          command: surge --project build
 
 workflows:
   version: 2
