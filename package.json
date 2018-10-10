@@ -33,7 +33,8 @@
     "build": "react-scripts build",
     "build:prod": "npm run build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "surge --project ./build"
   },
   "devDependencies": {
     "del-cli": "^1.1.0",
@@ -42,7 +43,8 @@
     "enzyme-to-json": "^3.3.4",
     "jest-enzyme": "^6.1.2",
     "react-component-setup": "^0.3.1",
-    "react-test-renderer": "^16.4.1"
+    "react-test-renderer": "^16.4.1",
+    "surge": "^0.20.1"
   },
   "jest": {
     "collectCoverageFrom": [
