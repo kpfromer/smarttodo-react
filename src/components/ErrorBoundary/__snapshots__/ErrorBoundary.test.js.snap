@@ -18,7 +18,7 @@ exports[`ErrorBoundary if child error renders error message and crash report but
     </p>
   </div>
   <button
-    className="jss25 jss1 jss10 jss13"
+    className="jss27 jss1 jss12 jss15"
     disabled={false}
     onBlur={[Function]}
     onClick={[Function]}
@@ -40,7 +40,7 @@ exports[`ErrorBoundary if child error renders error message and crash report but
       Send Crash Report
     </span>
     <span
-      className="jss28"
+      className="jss30"
     />
   </button>
 </div>

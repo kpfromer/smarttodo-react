@@ -68,7 +68,7 @@ exports[`Header renders a material design AppBar 1`] = `
       className="menuButton"
       color="inherit"
     >
-      <pure(Menu) />
+      <pure(MenuIcon) />
     </WithStyles(IconButton)>
     <WithStyles(Typography)
       className="flex"

@@ -20,7 +20,7 @@ exports[`login reducer REQUEST_LOGIN displays spinner 1`] = `
 Object {
   "didInvalidate": false,
   "isFetching": true,
-  "token": null,
+  "token": "jwt-token-in-local-storage",
 }
 `;
 
