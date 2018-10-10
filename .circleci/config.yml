@@ -42,7 +42,7 @@ jobs:
 
       # Save build for deployment
       - save_cache:
-          key: v1-build-{{ .Environment }}
+          key: v1-build
           paths:
               - build
   deploy:
@@ -52,7 +52,7 @@ jobs:
     steps:
       # Get the build folder
       - restore_cache:
-          key: v1-build-{{ .Environment }}
+          key: v1-build
       - run:
           name: Install surge
           command: npm install surge
