@@ -39,11 +39,21 @@ jobs:
 
       # run build
       - run: npm run build
+
+      # Save build for deployment
+      - save_cache:
+          key: v1-build-{{ .Environment }}
+          paths:
+              - build
   deploy:
     docker:
       - image: circleci/node:7.10
     working_directory: ~/repo
     steps:
+      # Get the build folder
+      - restore_cache:
+          key: v1-build-{{ .Environment }}
+      # Deploy the build folder to surge
       - run: 
           name: Deploy to Surge.sh
           command: npm run deploy
