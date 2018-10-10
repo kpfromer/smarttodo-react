@@ -55,11 +55,11 @@ jobs:
           key: v1-build-{{ .Environment }}
       - run:
           name: Install surge
-          command: npm install -g surge
+          command: npm install surge
       # Deploy the build folder to surge
       - run: 
           name: Deploy Build to Surge.sh
-          command: surge --project build
+          command: node_modules/.bin/surge --project build
 
 workflows:
   version: 2
