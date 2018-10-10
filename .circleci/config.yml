@@ -42,7 +42,10 @@ jobs:
     branches:
       only:
         - master
+    docker:
+      - image: circleci/node:7.10
+    working_directory: ~/repo
     steps:
       - run: 
-        name: Deploy to Surge.sh
-        command: npm run deploy
+          name: Deploy to Surge.sh
+          command: npm run deploy
