@@ -5,14 +5,10 @@ describe('login reducer', () => {
   let mockGetItem, mockSetItem, mockRemoveItem;
 
   beforeEach(() => {
-    mockGetItem = jest.fn();
-    mockSetItem = jest.fn();
-    mockRemoveItem = jest.fn();
-    global.localStorage = {
-      getItem: mockGetItem,
-      setItem: mockSetItem,
-      removeItem: mockRemoveItem
-    };
+    // SEE https://github.com/facebook/jest/issues/6858#issuecomment-413677180 for more information about about localStorage mocking with jest
+    mockGetItem = jest.spyOn(Storage.prototype, 'getItem');
+    mockSetItem = jest.spyOn(Storage.prototype, 'setItem');
+    mockRemoveItem = jest.spyOn(Storage.prototype, 'removeItem');
   });
 
   it('defaults to not fetching', () => {
