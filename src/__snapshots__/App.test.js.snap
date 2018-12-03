@@ -2,6 +2,11 @@
 
 exports[`App renders routes 1`] = `
 <Switch>
+  <Route
+    component={[Function]}
+    exact={true}
+    path="/"
+  />
   <Connect(PrivateRoute)
     component={[Function]}
     path="/todo"
