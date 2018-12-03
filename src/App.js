@@ -9,6 +9,8 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import GlobalSnackbar from "./containers/GlobalSnackbar/GlobalSnackbar";
 import Logout from "./components/Logout/Logout";
 import Register from "./components/Register/Register";
+import Home from './Page/Home'
+import ThemeProvider from './ThemeProvider';
 
 import styles from './App.module.css'
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
@@ -18,19 +20,22 @@ class App extends Component {
     return (
       <BrowserRouter>
         <ErrorBoundary>
-          <div className={styles.container}>
-            <Header/>
-            <ErrorBoundary>
-              <Switch>
-                <PrivateRoute path="/todo" component={TodoList}/>
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/login" component={Login}/>
-                <Route exact path="/logout" component={Logout}/>
-                <Route component={NotFound}/>
-              </Switch>
-            </ErrorBoundary>
-          </div>
-          <GlobalSnackbar />
+          <ThemeProvider>
+            <div className={styles.container}>
+              <Header/>
+              <ErrorBoundary>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <PrivateRoute path="/todo" component={TodoList}/>
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/login" component={Login}/>
+                  <Route exact path="/logout" component={Logout}/>
+                  <Route component={NotFound}/>
+                </Switch>
+              </ErrorBoundary>
+            </div>
+            <GlobalSnackbar />
+          </ThemeProvider>
         </ErrorBoundary>
       </BrowserRouter>
     );
